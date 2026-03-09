@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import {
   BookOpen, Terminal, Container, Copy, Check, ChevronRight,
   Cpu, Server, HardDrive, Network, Activity, Radio,
-  Code2, FileText, Webhook, Shield, ExternalLink,
+  Code2, FileText, Webhook, Shield, ExternalLink, Monitor,
 } from "lucide-react";
 
 const GITHUB_REPO = "https://github.com/bshah1914/cloudsecoptoolv4";
@@ -28,8 +28,17 @@ function CopyButton({ text }: { text: string }) {
   );
 }
 
-const agentInstallCmd = `curl -sSL https://raw.githubusercontent.com/bshah1914/cloudsecoptoolv4/master/agent/install.sh | \\
-  bash -s -- --api-key YOUR_AGENT_KEY --api-url https://your-server.com/api/v1`;
+const linuxInstallCmd = `curl -sSL https://raw.githubusercontent.com/bshah1914/cloudsecoptoolv4/master/agent/install.sh | \\
+  sudo bash -s -- --api-key YOUR_AGENT_KEY --api-url https://your-server.com/api/v1`;
+
+const macInstallCmd = `curl -sSL https://raw.githubusercontent.com/bshah1914/cloudsecoptoolv4/master/agent/install-macos.sh -o install-macos.sh && \\
+  chmod +x install-macos.sh && \\
+  ./install-macos.sh --api-key YOUR_AGENT_KEY --api-url https://your-server.com/api/v1`;
+
+const windowsInstallCmd = `# PowerShell (Run as Administrator)
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/bshah1914/cloudsecoptoolv4/master/agent/install.ps1" -OutFile install.ps1
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/bshah1914/cloudsecoptoolv4/master/agent/cloudlunar_agent.py" -OutFile cloudlunar_agent.py
+.\\install.ps1 -ApiKey YOUR_AGENT_KEY -ApiUrl https://your-server.com/api/v1`;
 
 const dockerAgentCmd = `docker run -d \\
   --name cloudlunar-agent \\
@@ -41,9 +50,7 @@ const dockerAgentCmd = `docker run -d \\
   -v /var/run/docker.sock:/var/run/docker.sock:ro \\
   cloudlunar-agent`;
 
-const manualAgentCmd = `git clone https://github.com/bshah1914/cloudsecoptoolv4.git
-cd cloudsecoptoolv4/agent
-pip install -r requirements.txt
+const manualAgentCmd = `pip install psutil requests
 python cloudlunar_agent.py \\
   --api-url http://localhost:8000/api/v1 \\
   --api-key YOUR_AGENT_KEY \\
@@ -67,12 +74,187 @@ const configOptions = [
   { flag: "--debug", env: "—", default: "false", desc: "Verbose debug logging" },
 ];
 
+type AgentOS = "linux" | "macos" | "windows" | "docker" | "manual";
+
+function AgentInstallTab() {
+  const [agentOS, setAgentOS] = useState<AgentOS>("linux");
+
+  return (
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }}>
+      <div className="flex items-center gap-2 mb-2">
+        <Radio className="w-5 h-5 text-teal-400" />
+        <h3 className="text-lg font-semibold text-white">CloudLunar Agent — Cross-Platform Monitoring</h3>
+        <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">$0 Cost</span>
+      </div>
+      <p className="text-sm text-gray-400 mb-6">
+        A lightweight Python process that collects system metrics via <code className="text-teal-300 bg-teal-500/10 px-1.5 py-0.5 rounded text-[11px]">psutil</code> and pushes them every 60 seconds. Works on <strong className="text-white">Linux, macOS, and Windows</strong>. <strong className="text-white">Zero CloudWatch costs.</strong>
+      </p>
+
+      {/* Platform Selector */}
+      <div className="flex flex-wrap gap-2 mb-6">
+        {([
+          { id: "linux" as AgentOS, label: "Linux", icon: Terminal, color: "text-emerald-400" },
+          { id: "macos" as AgentOS, label: "macOS", icon: Monitor, color: "text-blue-400" },
+          { id: "windows" as AgentOS, label: "Windows", icon: Monitor, color: "text-blue-400" },
+          { id: "docker" as AgentOS, label: "Docker", icon: Container, color: "text-cyan-400" },
+          { id: "manual" as AgentOS, label: "Manual (Any OS)", icon: Code2, color: "text-amber-400" },
+        ]).map((os) => (
+          <button
+            key={os.id}
+            onClick={() => setAgentOS(os.id)}
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-medium transition-all ${
+              agentOS === os.id
+                ? "bg-teal-500/15 border border-teal-500/30 text-white"
+                : "bg-white/[0.03] border border-white/5 text-gray-500 hover:bg-white/[0.06] hover:text-gray-300"
+            }`}
+          >
+            <os.icon className={`w-3.5 h-3.5 ${agentOS === os.id ? os.color : "text-gray-600"}`} />
+            {os.label}
+          </button>
+        ))}
+      </div>
+
+      {/* Linux */}
+      {agentOS === "linux" && (
+        <div className="space-y-3 mb-8">
+          <div className="bg-[#0a0a1a] rounded-xl border border-white/5 overflow-hidden">
+            <div className="flex items-center justify-between px-4 py-2 border-b border-white/5">
+              <span className="text-[11px] text-gray-500">bash — systemd service</span>
+              <CopyButton text={linuxInstallCmd} />
+            </div>
+            <div className="px-4 py-3">
+              <pre className="text-sm text-green-400 font-mono whitespace-pre-wrap">$ {linuxInstallCmd}</pre>
+            </div>
+          </div>
+          <p className="text-[11px] text-gray-500 ml-1">Creates a <code className="text-gray-400">systemd</code> service at <code className="text-gray-400">/opt/cloudlunar-agent/</code> with auto-restart on boot.</p>
+          <p className="text-[11px] text-gray-600 ml-1">Manage: <code className="text-gray-400">sudo systemctl {'{'} start | stop | restart | status {'}'} cloudlunar-agent</code></p>
+        </div>
+      )}
+
+      {/* macOS */}
+      {agentOS === "macos" && (
+        <div className="space-y-3 mb-8">
+          <div className="bg-[#0a0a1a] rounded-xl border border-white/5 overflow-hidden">
+            <div className="flex items-center justify-between px-4 py-2 border-b border-white/5">
+              <span className="text-[11px] text-gray-500">bash — launchd agent</span>
+              <CopyButton text={macInstallCmd} />
+            </div>
+            <div className="px-4 py-3">
+              <pre className="text-sm text-green-400 font-mono whitespace-pre-wrap">$ {macInstallCmd}</pre>
+            </div>
+          </div>
+          <p className="text-[11px] text-gray-500 ml-1">Creates a <code className="text-gray-400">launchd</code> agent that auto-starts on login with KeepAlive for crash recovery.</p>
+          <p className="text-[11px] text-gray-600 ml-1">Logs: <code className="text-gray-400">tail -f ~/.cloudlunar-agent/agent.log</code></p>
+        </div>
+      )}
+
+      {/* Windows */}
+      {agentOS === "windows" && (
+        <div className="space-y-3 mb-8">
+          <div className="bg-[#0a0a1a] rounded-xl border border-white/5 overflow-hidden">
+            <div className="flex items-center justify-between px-4 py-2 border-b border-white/5">
+              <span className="text-[11px] text-gray-500">powershell — Run as Administrator</span>
+              <CopyButton text={windowsInstallCmd} />
+            </div>
+            <div className="px-4 py-3">
+              <pre className="text-sm text-green-400 font-mono whitespace-pre-wrap">{windowsInstallCmd}</pre>
+            </div>
+          </div>
+          <p className="text-[11px] text-gray-500 ml-1">Creates a Scheduled Task that runs at startup as SYSTEM. Install <span className="text-teal-400">NSSM</span> for a proper Windows service.</p>
+          <p className="text-[11px] text-gray-600 ml-1">Uninstall: <code className="text-gray-400">.\install.ps1 -ApiKey x -Uninstall</code></p>
+        </div>
+      )}
+
+      {/* Docker */}
+      {agentOS === "docker" && (
+        <div className="space-y-3 mb-8">
+          <div className="bg-[#0a0a1a] rounded-xl border border-white/5 overflow-hidden">
+            <div className="flex items-center justify-between px-4 py-2 border-b border-white/5">
+              <span className="text-[11px] text-gray-500">docker — any OS</span>
+              <CopyButton text={dockerAgentCmd} />
+            </div>
+            <div className="px-4 py-3">
+              <pre className="text-sm text-green-400 font-mono whitespace-pre-wrap">$ {dockerAgentCmd}</pre>
+            </div>
+          </div>
+          <p className="text-[11px] text-gray-500 ml-1">Works on any OS with Docker. Mounts <code className="text-gray-400">/proc</code> and Docker socket for full system + container metrics.</p>
+        </div>
+      )}
+
+      {/* Manual */}
+      {agentOS === "manual" && (
+        <div className="space-y-3 mb-8">
+          <div className="bg-[#0a0a1a] rounded-xl border border-white/5 overflow-hidden">
+            <div className="flex items-center justify-between px-4 py-2 border-b border-white/5">
+              <span className="text-[11px] text-gray-500">python — works everywhere</span>
+              <CopyButton text={manualAgentCmd} />
+            </div>
+            <div className="px-4 py-3">
+              <pre className="text-sm text-green-400 font-mono whitespace-pre-wrap">$ {manualAgentCmd}</pre>
+            </div>
+          </div>
+          <p className="text-[11px] text-gray-500 ml-1">Just needs Python 3.8+ and pip. Works on any OS — Linux, macOS, Windows, ARM, x86.</p>
+        </div>
+      )}
+
+      {/* What it collects */}
+      <h4 className="text-sm font-semibold text-white mb-4">Metrics Collected Every 60 Seconds</h4>
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-8">
+        {[
+          { icon: Cpu, label: "CPU", desc: "Overall %, per-core, user/system/iowait, load averages (1m, 5m, 15m)", color: "text-blue-400" },
+          { icon: Server, label: "Memory", desc: "Total, used, available RAM (GB), usage %, swap usage", color: "text-purple-400" },
+          { icon: HardDrive, label: "Disk", desc: "Per-partition total/used/free, I/O read/write bytes & count", color: "text-blue-400" },
+          { icon: Network, label: "Network", desc: "Bytes & packets sent/recv, error counts, active connections, listening ports", color: "text-cyan-400" },
+          { icon: Activity, label: "Processes", desc: "Total count, top 10 by CPU usage, top 10 by memory usage", color: "text-amber-400" },
+          { icon: Container, label: "Docker", desc: "Container ID/name/image/status, CPU %, memory usage/limit per container", color: "text-green-400" },
+        ].map((item) => (
+          <div key={item.label} className="bg-white/[0.03] rounded-xl p-4 border border-white/5">
+            <div className="flex items-center gap-2.5 mb-2">
+              <item.icon className={`w-4 h-4 ${item.color}`} />
+              <h5 className="text-xs font-semibold text-white">{item.label}</h5>
+            </div>
+            <p className="text-[11px] text-gray-500">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* Supported Platforms */}
+      <div className="bg-gradient-to-br from-teal-600/10 to-cyan-600/10 border border-teal-500/15 rounded-xl p-6 mb-6">
+        <h4 className="text-sm font-bold text-white mb-4">Supported Platforms</h4>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {[
+            { label: "Linux", desc: "systemd service — Ubuntu, Debian, RHEL, Amazon Linux", color: "bg-emerald-500/10 text-emerald-300 border-emerald-500/20" },
+            { label: "macOS", desc: "launchd agent — macOS 12+ (Intel & Apple Silicon)", color: "bg-blue-500/10 text-blue-300 border-blue-500/20" },
+            { label: "Windows", desc: "Scheduled Task / NSSM — Windows 10, 11, Server", color: "bg-blue-500/10 text-blue-300 border-blue-500/20" },
+            { label: "Docker", desc: "Any OS with Docker — full container + host metrics", color: "bg-cyan-500/10 text-cyan-300 border-cyan-500/20" },
+          ].map((p) => (
+            <div key={p.label} className="text-center">
+              <span className={`inline-block text-[10px] px-3 py-1 rounded-full border font-semibold mb-2 ${p.color}`}>{p.label}</span>
+              <p className="text-[10px] text-gray-500">{p.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Cost Breakdown */}
+      <div className="bg-emerald-500/5 rounded-xl p-5 border border-emerald-500/10">
+        <h4 className="text-sm font-semibold text-emerald-400 mb-3">Why It's Free (No AWS Costs)</h4>
+        <p className="text-[11px] text-gray-400">
+          The agent reads metrics directly from the OS via <code className="text-teal-300">psutil</code> — no CloudWatch <code className="text-teal-300">GetMetricData</code> calls.
+          AWS resource discovery (optional) uses free <code className="text-teal-300">describe_*</code> / <code className="text-teal-300">list_*</code> API calls only.
+          <strong className="text-emerald-400"> Total AWS cost: $0.</strong>
+        </p>
+      </div>
+    </motion.div>
+  );
+}
+
 export default function Documentation() {
   const [activeTab, setActiveTab] = useState<DocTab>("agent");
 
   return (
     <section id="docs" className="relative py-28 md:py-36 bg-grid">
-      <div className="absolute inset-0 bg-gradient-to-b from-[#030014] via-transparent to-[#030014] pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#030712] via-transparent to-[#030712] pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         {/* Header */}
@@ -131,175 +313,18 @@ export default function Documentation() {
         >
           {/* Agent Installation Tab */}
           {activeTab === "agent" && (
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }}>
-              <div className="flex items-center gap-2 mb-2">
-                <Radio className="w-5 h-5 text-teal-400" />
-                <h3 className="text-lg font-semibold text-white">CloudLunar Agent — Real-Time Monitoring</h3>
-                <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">$0 Cost</span>
-              </div>
-              <p className="text-sm text-gray-400 mb-8">
-                A lightweight Python process that collects system metrics via <code className="text-teal-300 bg-teal-500/10 px-1.5 py-0.5 rounded text-[11px]">psutil</code> (reads <code className="text-teal-300 bg-teal-500/10 px-1.5 py-0.5 rounded text-[11px]">/proc</code>) and pushes them to your CloudLunar dashboard every 60 seconds. <strong className="text-white">Zero CloudWatch costs.</strong>
-              </p>
-
-              {/* Install Options */}
-              <div className="space-y-6 mb-8">
-                {/* Option 1: One-Line */}
-                <div>
-                  <div className="flex items-center gap-2 mb-3">
-                    <Terminal className="w-4 h-4 text-emerald-400" />
-                    <h4 className="text-sm font-semibold text-white">Option 1: One-Line Install (Linux, systemd)</h4>
-                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-green-500/10 text-green-400 border border-green-500/20">Recommended</span>
-                  </div>
-                  <div className="bg-[#0a0a1a] rounded-xl border border-white/5 overflow-hidden">
-                    <div className="flex items-center justify-between px-4 py-2 border-b border-white/5">
-                      <span className="text-[11px] text-gray-500">bash</span>
-                      <CopyButton text={agentInstallCmd} />
-                    </div>
-                    <div className="px-4 py-3">
-                      <pre className="text-sm text-green-400 font-mono whitespace-pre-wrap">$ {agentInstallCmd}</pre>
-                    </div>
-                  </div>
-                  <p className="text-[11px] text-gray-500 mt-2 ml-1">Installs psutil + requests, downloads agent to <code className="text-gray-400">/opt/cloudlunar-agent/</code>, creates systemd service with auto-restart.</p>
-                </div>
-
-                {/* Option 2: Docker */}
-                <div>
-                  <div className="flex items-center gap-2 mb-3">
-                    <Container className="w-4 h-4 text-blue-400" />
-                    <h4 className="text-sm font-semibold text-white">Option 2: Docker</h4>
-                  </div>
-                  <div className="bg-[#0a0a1a] rounded-xl border border-white/5 overflow-hidden">
-                    <div className="flex items-center justify-between px-4 py-2 border-b border-white/5">
-                      <span className="text-[11px] text-gray-500">docker</span>
-                      <CopyButton text={dockerAgentCmd} />
-                    </div>
-                    <div className="px-4 py-3">
-                      <pre className="text-sm text-green-400 font-mono whitespace-pre-wrap">$ {dockerAgentCmd}</pre>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Option 3: Manual */}
-                <div>
-                  <div className="flex items-center gap-2 mb-3">
-                    <Code2 className="w-4 h-4 text-amber-400" />
-                    <h4 className="text-sm font-semibold text-white">Option 3: Manual Install</h4>
-                  </div>
-                  <div className="bg-[#0a0a1a] rounded-xl border border-white/5 overflow-hidden">
-                    <div className="flex items-center justify-between px-4 py-2 border-b border-white/5">
-                      <span className="text-[11px] text-gray-500">bash</span>
-                      <CopyButton text={manualAgentCmd} />
-                    </div>
-                    <div className="px-4 py-3">
-                      <pre className="text-sm text-green-400 font-mono whitespace-pre-wrap">$ {manualAgentCmd}</pre>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* What it collects */}
-              <h4 className="text-sm font-semibold text-white mb-4">Metrics Collected Every 60 Seconds</h4>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-8">
-                {[
-                  { icon: Cpu, label: "CPU", desc: "Overall %, per-core, user/system/iowait, load averages (1m, 5m, 15m)", color: "text-indigo-400" },
-                  { icon: Server, label: "Memory", desc: "Total, used, available RAM (GB), usage %, swap usage", color: "text-purple-400" },
-                  { icon: HardDrive, label: "Disk", desc: "Per-partition total/used/free, I/O read/write bytes & count", color: "text-blue-400" },
-                  { icon: Network, label: "Network", desc: "Bytes & packets sent/recv, error counts, active connections, listening ports", color: "text-cyan-400" },
-                  { icon: Activity, label: "Processes", desc: "Total count, top 10 by CPU usage, top 10 by memory usage", color: "text-amber-400" },
-                  { icon: Container, label: "Docker", desc: "Container ID/name/image/status, CPU %, memory usage/limit per container", color: "text-green-400" },
-                ].map((item) => (
-                  <div key={item.label} className="bg-white/[0.03] rounded-xl p-4 border border-white/5">
-                    <div className="flex items-center gap-2.5 mb-2">
-                      <item.icon className={`w-4 h-4 ${item.color}`} />
-                      <h5 className="text-xs font-semibold text-white">{item.label}</h5>
-                    </div>
-                    <p className="text-[11px] text-gray-500">{item.desc}</p>
-                  </div>
-                ))}
-              </div>
-
-              {/* How It Works */}
-              <div className="bg-gradient-to-br from-teal-600/10 to-cyan-600/10 border border-teal-500/15 rounded-xl p-6 mb-6">
-                <h4 className="text-sm font-bold text-white mb-4">Architecture</h4>
-                <div className="flex flex-col sm:flex-row items-center gap-4 text-center">
-                  {[
-                    { step: "1", label: "Install Agent", desc: "psutil + Python on your server" },
-                    { step: "2", label: "Collect Metrics", desc: "Reads /proc every 60 seconds" },
-                    { step: "3", label: "Push to Backend", desc: "HTTP POST with API key auth" },
-                    { step: "4", label: "Live Dashboard", desc: "WebSocket real-time streaming" },
-                  ].map((s, i) => (
-                    <React.Fragment key={s.step}>
-                      <div className="flex-1">
-                        <div className="w-9 h-9 rounded-full bg-teal-500/20 text-teal-400 text-xs font-bold flex items-center justify-center mx-auto mb-2">{s.step}</div>
-                        <p className="text-xs font-semibold text-white">{s.label}</p>
-                        <p className="text-[10px] text-gray-500 mt-0.5">{s.desc}</p>
-                      </div>
-                      {i < 3 && <ChevronRight className="w-4 h-4 text-teal-600 hidden sm:block flex-shrink-0" />}
-                    </React.Fragment>
-                  ))}
-                </div>
-                <div className="flex flex-wrap gap-2 mt-5 justify-center">
-                  <span className="text-[10px] px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/20">EC2 Instances</span>
-                  <span className="text-[10px] px-2.5 py-1 rounded-full bg-blue-500/10 text-blue-300 border border-blue-500/20">ECS Containers</span>
-                  <span className="text-[10px] px-2.5 py-1 rounded-full bg-purple-500/10 text-purple-300 border border-purple-500/20">Kubernetes Pods</span>
-                  <span className="text-[10px] px-2.5 py-1 rounded-full bg-amber-500/10 text-amber-300 border border-amber-500/20">Any Linux / macOS</span>
-                </div>
-              </div>
-
-              {/* Cost Breakdown */}
-              <div className="bg-emerald-500/5 rounded-xl p-5 border border-emerald-500/10">
-                <h4 className="text-sm font-semibold text-emerald-400 mb-3">Why It's Free (No AWS Costs)</h4>
-                <div className="overflow-x-auto">
-                  <table className="w-full text-xs">
-                    <thead>
-                      <tr className="text-left text-gray-500 border-b border-white/5">
-                        <th className="pb-2 pr-4">Data Source</th>
-                        <th className="pb-2 pr-4">Method</th>
-                        <th className="pb-2">AWS Cost</th>
-                      </tr>
-                    </thead>
-                    <tbody className="text-gray-400">
-                      <tr className="border-b border-white/5">
-                        <td className="py-2 pr-4">CPU, Memory, Disk, Network</td>
-                        <td className="py-2 pr-4"><code className="text-teal-300">psutil</code> (reads /proc)</td>
-                        <td className="py-2 text-emerald-400 font-bold">$0</td>
-                      </tr>
-                      <tr className="border-b border-white/5">
-                        <td className="py-2 pr-4">Process list</td>
-                        <td className="py-2 pr-4"><code className="text-teal-300">psutil.process_iter()</code></td>
-                        <td className="py-2 text-emerald-400 font-bold">$0</td>
-                      </tr>
-                      <tr className="border-b border-white/5">
-                        <td className="py-2 pr-4">Docker containers</td>
-                        <td className="py-2 pr-4">Docker SDK</td>
-                        <td className="py-2 text-emerald-400 font-bold">$0</td>
-                      </tr>
-                      <tr className="border-b border-white/5">
-                        <td className="py-2 pr-4">AWS resource counts</td>
-                        <td className="py-2 pr-4"><code className="text-teal-300">describe_*</code>, <code className="text-teal-300">list_*</code></td>
-                        <td className="py-2 text-emerald-400 font-bold">$0</td>
-                      </tr>
-                      <tr>
-                        <td className="py-2 pr-4">CloudWatch metrics</td>
-                        <td className="py-2 pr-4 text-gray-600">NOT USED</td>
-                        <td className="py-2 text-emerald-400 font-bold">$0</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </motion.div>
+            <AgentInstallTab />
           )}
 
           {/* API Reference Tab */}
           {activeTab === "api" && (
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }}>
               <div className="flex items-center gap-2 mb-2">
-                <Code2 className="w-5 h-5 text-indigo-400" />
+                <Code2 className="w-5 h-5 text-blue-400" />
                 <h3 className="text-lg font-semibold text-white">Agent API Endpoints</h3>
               </div>
               <p className="text-sm text-gray-400 mb-6">
-                All agent API endpoints are authenticated via API key sent in the <code className="text-indigo-300 bg-indigo-500/10 px-1.5 py-0.5 rounded text-[11px]">X-API-Key</code> header.
+                All agent API endpoints are authenticated via API key sent in the <code className="text-blue-300 bg-blue-500/10 px-1.5 py-0.5 rounded text-[11px]">X-API-Key</code> header.
               </p>
 
               {/* Endpoints Table */}
@@ -420,13 +445,13 @@ ws.onmessage = (event) => {
                     ],
                   },
                   {
-                    icon: Terminal, title: "Systemd Management", color: "text-indigo-400", bg: "from-indigo-600/10 to-blue-600/10", border: "border-indigo-500/15",
+                    icon: Terminal, title: "Service Management", color: "text-blue-400", bg: "from-blue-600/10 to-blue-600/10", border: "border-blue-500/15",
                     items: [
-                      "sudo systemctl status cloudlunar-agent",
-                      "journalctl -u cloudlunar-agent -f",
-                      "sudo systemctl restart cloudlunar-agent",
-                      "sudo systemctl stop cloudlunar-agent",
-                      "sudo systemctl disable --now cloudlunar-agent",
+                      "Linux: sudo systemctl {start|stop|restart|status} cloudlunar-agent",
+                      "Linux logs: journalctl -u cloudlunar-agent -f",
+                      "macOS: launchctl {load|unload} ~/Library/LaunchAgents/com.cloudlunar.agent.plist",
+                      "macOS logs: tail -f ~/.cloudlunar-agent/agent.log",
+                      "Windows: Get-ScheduledTask -TaskName CloudLunarAgent",
                     ],
                   },
                   {
@@ -436,7 +461,7 @@ ws.onmessage = (event) => {
                       "Memory: ~25-40 MB RSS",
                       "Network: ~2-5 KB per metric push (JSON payload)",
                       "Disk: Zero (no local storage)",
-                      "Runs on: EC2, ECS, K8s, any Linux/macOS box",
+                      "Runs on: EC2, ECS, K8s, any Linux/macOS/Windows box",
                     ],
                   },
                   {

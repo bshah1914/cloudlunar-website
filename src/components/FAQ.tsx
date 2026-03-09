@@ -23,7 +23,7 @@ const faqs = [
   },
   {
     q: "Can I use CloudLunar with multiple AWS accounts?",
-    a: "Yes. CloudLunar supports multi-account setups. Each account has its own IAM role and gets scanned independently. The dashboard aggregates data across all accounts with per-account filtering. Starter supports 5 accounts, Professional up to 20, and Enterprise is unlimited.",
+    a: "Yes. CloudLunar supports multi-account setups. Each account has its own IAM role and gets scanned independently. The dashboard aggregates data across all accounts with per-account filtering. Growth supports 10 accounts, Professional up to 50, and Enterprise is unlimited.",
   },
   {
     q: "What optimization checks does the engine run?",
@@ -39,11 +39,23 @@ const faqs = [
   },
   {
     q: "How often does CloudLunar scan my resources?",
-    a: "Scan frequency depends on your plan: Free gets basic scans, Starter ($99/mo) includes regular scans, Professional ($299/mo) gets daily automated scans, and Enterprise ($999/mo) offers continuous real-time scanning. You can also trigger on-demand scans from the dashboard at any time.",
+    a: "Scan frequency depends on your plan: Starter gets basic scans, Growth ($79/mo) includes regular scans, Professional ($199/mo) gets daily automated scans, and Enterprise ($499/mo) offers continuous real-time scanning. You can also trigger on-demand scans from the dashboard at any time.",
   },
   {
     q: "Is CloudLunar SOC 2 compliant?",
     a: "Yes. The platform is built with SOC 2 compliance in mind: encrypted data at rest and in transit, complete audit logging, RBAC with least-privilege access, and no persistent credential storage. We also monitor your resources against CIS and SOC 2 benchmarks.",
+  },
+  {
+    q: "Does the monitoring agent work on Windows and macOS?",
+    a: "Yes. The CloudLunar agent runs on Linux (systemd), macOS (launchd), and Windows (Scheduled Task or NSSM service). It uses psutil for cross-platform system metrics \u2014 CPU, memory, disk, network, and processes \u2014 with zero CloudWatch costs. Each platform has a dedicated one-command installer.",
+  },
+  {
+    q: "What is cost anomaly detection?",
+    a: "CloudLunar automatically detects cost spikes and drops by comparing each day's spend against a rolling average. When a service deviates significantly, you get an alert. This catches runaway resources, unexpected charges, and billing errors before they show up on your monthly bill.",
+  },
+  {
+    q: "Can I allocate costs by team or project?",
+    a: "Yes. Tag-based cost allocation lets you group AWS costs by any tag key \u2014 Environment, Team, Project, or custom tags. See exactly which team or project is driving spend, track untagged resources, and export breakdowns for chargeback or showback reporting.",
   },
 ];
 
@@ -54,7 +66,7 @@ function FAQItem({ q, a, isOpen, toggle }: { q: string; a: string; isOpen: boole
         <span className={`text-sm font-medium transition-colors ${isOpen ? "text-white" : "text-gray-300 group-hover:text-white"}`}>
           {q}
         </span>
-        <ChevronDown className={`w-5 h-5 text-gray-500 flex-shrink-0 ml-4 transition-transform duration-300 ${isOpen ? "rotate-180 text-indigo-400" : ""}`} />
+        <ChevronDown className={`w-5 h-5 text-gray-500 flex-shrink-0 ml-4 transition-transform duration-300 ${isOpen ? "rotate-180 text-cyan-400" : ""}`} />
       </button>
       <AnimatePresence>
         {isOpen && (
@@ -78,7 +90,7 @@ export default function FAQ() {
 
   return (
     <section id="faq" className="relative py-28 md:py-36 bg-grid">
-      <div className="absolute inset-0 bg-gradient-to-b from-[#030014] via-transparent to-[#030014] pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#030712] via-transparent to-[#030712] pointer-events-none" />
 
       <div className="relative z-10 max-w-4xl mx-auto px-6">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
@@ -93,13 +105,7 @@ export default function FAQ() {
 
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="glass-card p-6 md:p-8">
           {faqs.map((faq, i) => (
-            <FAQItem
-              key={i}
-              q={faq.q}
-              a={faq.a}
-              isOpen={openIndex === i}
-              toggle={() => setOpenIndex(openIndex === i ? null : i)}
-            />
+            <FAQItem key={i} q={faq.q} a={faq.a} isOpen={openIndex === i} toggle={() => setOpenIndex(openIndex === i ? null : i)} />
           ))}
         </motion.div>
 

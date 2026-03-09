@@ -59,7 +59,7 @@ export default function GetStarted() {
 
   return (
     <section id="get-started" className="relative py-28 md:py-36 bg-grid">
-      <div className="absolute inset-0 bg-gradient-to-b from-[#030014] via-transparent to-[#030014] pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#030712] via-transparent to-[#030712] pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         {/* Header */}
@@ -90,7 +90,7 @@ export default function GetStarted() {
             { icon: Clock, label: "Setup Time", value: "< 5 min", color: "text-green-400" },
             { icon: Shield, label: "Read-Only", value: "Safe Access", color: "text-blue-400" },
             { icon: Zap, label: "First Scan", value: "Instant", color: "text-amber-400" },
-            { icon: Cpu, label: "Requirements", value: "Docker / Node", color: "text-purple-400" },
+            { icon: Cpu, label: "Requirements", value: "Docker / Node", color: "text-cyan-400" },
           ].map((stat) => (
             <div key={stat.label} className="glass-card p-4 text-center">
               <stat.icon className={`w-5 h-5 ${stat.color} mx-auto mb-2`} />
@@ -114,11 +114,11 @@ export default function GetStarted() {
                 onClick={() => setActivePlatform(p.id)}
                 className={`flex items-center gap-3 px-5 py-3.5 rounded-xl text-left transition-all flex-1 ${
                   activePlatform === p.id
-                    ? "bg-indigo-500/15 border border-indigo-500/30 text-white"
+                    ? "bg-blue-500/15 border border-blue-500/30 text-white"
                     : "bg-white/[0.03] border border-white/5 text-gray-400 hover:bg-white/[0.06] hover:text-gray-300"
                 }`}
               >
-                <p.icon className={`w-5 h-5 flex-shrink-0 ${activePlatform === p.id ? "text-indigo-400" : "text-gray-500"}`} />
+                <p.icon className={`w-5 h-5 flex-shrink-0 ${activePlatform === p.id ? "text-blue-400" : "text-gray-500"}`} />
                 <div>
                   <p className="text-sm font-medium">{p.label}</p>
                   <p className="text-[11px] text-gray-500">{p.desc}</p>
@@ -144,7 +144,7 @@ export default function GetStarted() {
                   <div key={i} className="bg-[#0a0a1a] rounded-xl border border-white/5 overflow-hidden">
                     <div className="flex items-center justify-between px-4 py-2 border-b border-white/5">
                       <div className="flex items-center gap-2">
-                        <span className="text-[10px] font-bold text-indigo-400 bg-indigo-500/10 w-5 h-5 rounded flex items-center justify-center">{i + 1}</span>
+                        <span className="text-[10px] font-bold text-blue-400 bg-blue-500/10 w-5 h-5 rounded flex items-center justify-center">{i + 1}</span>
                         <span className="text-[11px] text-gray-500">{step.label}</span>
                       </div>
                       <CopyButton text={step.cmd} />
@@ -156,10 +156,10 @@ export default function GetStarted() {
                 ))}
               </div>
 
-              <div className="mt-6 p-4 bg-indigo-500/5 rounded-xl border border-indigo-500/10">
+              <div className="mt-6 p-4 bg-blue-500/5 rounded-xl border border-blue-500/10">
                 <p className="text-xs text-gray-400">
-                  <span className="text-indigo-400 font-semibold">Tip:</span> After running <code className="text-indigo-300 bg-indigo-500/10 px-1.5 py-0.5 rounded text-[11px]">docker-compose up -d</code>, open{" "}
-                  <a href="http://localhost:3000" className="text-indigo-400 underline">http://localhost:3000</a> to access the dashboard. The backend API runs at port 8000.
+                  <span className="text-blue-400 font-semibold">Tip:</span> After running <code className="text-blue-300 bg-blue-500/10 px-1.5 py-0.5 rounded text-[11px]">docker-compose up -d</code>, open{" "}
+                  <a href="http://localhost:3000" className="text-blue-400 underline">http://localhost:3000</a> to access the dashboard. The backend API runs at port 8000.
                 </p>
               </div>
             </motion.div>
@@ -177,10 +177,10 @@ export default function GetStarted() {
                 <div className="bg-white/[0.03] rounded-xl p-4 border border-white/5">
                   <h4 className="text-xs font-semibold text-gray-300 mb-2">Prerequisites</h4>
                   <ul className="space-y-1.5 text-xs text-gray-500">
-                    <li className="flex items-center gap-2"><ChevronRight className="w-3 h-3 text-indigo-400" /> Python 3.10+</li>
-                    <li className="flex items-center gap-2"><ChevronRight className="w-3 h-3 text-indigo-400" /> Node.js 18+</li>
-                    <li className="flex items-center gap-2"><ChevronRight className="w-3 h-3 text-indigo-400" /> PostgreSQL 14+</li>
-                    <li className="flex items-center gap-2"><ChevronRight className="w-3 h-3 text-indigo-400" /> Redis 6+</li>
+                    <li className="flex items-center gap-2"><ChevronRight className="w-3 h-3 text-blue-400" /> Python 3.10+</li>
+                    <li className="flex items-center gap-2"><ChevronRight className="w-3 h-3 text-blue-400" /> Node.js 18+</li>
+                    <li className="flex items-center gap-2"><ChevronRight className="w-3 h-3 text-blue-400" /> PostgreSQL 14+</li>
+                    <li className="flex items-center gap-2"><ChevronRight className="w-3 h-3 text-blue-400" /> Redis 6+</li>
                   </ul>
                 </div>
                 <div className="bg-white/[0.03] rounded-xl p-4 border border-white/5">
@@ -285,10 +285,10 @@ export default function GetStarted() {
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-6">
                 {[
                   { icon: Bell, label: "Push Notifications", desc: "Real-time cost alerts via service worker", color: "text-red-400" },
-                  { icon: BarChart3, label: "Full Dashboard", desc: "Same features as the web version", color: "text-indigo-400" },
+                  { icon: BarChart3, label: "Full Dashboard", desc: "Same features as the web version", color: "text-blue-400" },
                   { icon: Wifi, label: "Offline Support", desc: "Cached data available without internet", color: "text-green-400" },
                   { icon: Zap, label: "Instant Updates", desc: "Always up to date — no store approval wait", color: "text-amber-400" },
-                  { icon: Smartphone, label: "Fullscreen Mode", desc: "Runs like a native app — no browser UI", color: "text-purple-400" },
+                  { icon: Smartphone, label: "Fullscreen Mode", desc: "Runs like a native app — no browser UI", color: "text-cyan-400" },
                   { icon: Shield, label: "No Store Needed", desc: "Install directly from browser, zero friction", color: "text-cyan-400" },
                 ].map((feature) => (
                   <div key={feature.label} className="bg-white/[0.03] rounded-xl p-4 border border-white/5">
@@ -302,14 +302,14 @@ export default function GetStarted() {
               </div>
 
               {/* Why PWA */}
-              <div className="bg-gradient-to-br from-indigo-600/10 to-purple-600/10 border border-indigo-500/15 rounded-xl p-6">
+              <div className="bg-gradient-to-br from-blue-600/10 to-cyan-600/10 border border-blue-500/15 rounded-xl p-6">
                 <div className="flex flex-col sm:flex-row items-center gap-6">
                   <div className="flex gap-3 flex-shrink-0">
                     {/* Phone Mockup */}
                     <div className="w-28 h-48 rounded-2xl bg-gradient-to-b from-[#0a0a1a] to-[#0f0f2a] border border-white/10 p-2 shadow-xl">
-                      <div className="w-full h-full rounded-xl bg-gradient-to-b from-indigo-900/30 to-purple-900/20 flex flex-col items-center justify-center gap-2">
-                        <div className="w-8 h-8 rounded-full bg-indigo-500/30 flex items-center justify-center">
-                          <BarChart3 className="w-4 h-4 text-indigo-400" />
+                      <div className="w-full h-full rounded-xl bg-gradient-to-b from-blue-900/30 to-cyan-900/20 flex flex-col items-center justify-center gap-2">
+                        <div className="w-8 h-8 rounded-full bg-blue-500/30 flex items-center justify-center">
+                          <BarChart3 className="w-4 h-4 text-blue-400" />
                         </div>
                         <div className="w-14 h-1.5 rounded bg-white/10" />
                         <div className="w-10 h-1 rounded bg-white/5" />
@@ -328,13 +328,13 @@ export default function GetStarted() {
                         <div className="w-1.5 h-1.5 rounded-full bg-amber-500/50" />
                         <div className="w-1.5 h-1.5 rounded-full bg-green-500/50" />
                       </div>
-                      <div className="w-full h-[calc(100%-16px)] rounded-b-lg bg-gradient-to-b from-indigo-900/20 to-purple-900/10 flex flex-col items-center justify-center gap-1.5">
-                        <div className="w-6 h-6 rounded-full bg-purple-500/30 flex items-center justify-center">
-                          <Monitor className="w-3 h-3 text-purple-400" />
+                      <div className="w-full h-[calc(100%-16px)] rounded-b-lg bg-gradient-to-b from-blue-900/20 to-cyan-900/10 flex flex-col items-center justify-center gap-1.5">
+                        <div className="w-6 h-6 rounded-full bg-cyan-500/30 flex items-center justify-center">
+                          <Monitor className="w-3 h-3 text-cyan-400" />
                         </div>
                         <div className="w-20 h-1 rounded bg-white/10" />
-                        <div className="w-24 h-4 rounded bg-indigo-500/10 flex items-center justify-center">
-                          <span className="text-[6px] text-indigo-400 font-bold">CloudLunar</span>
+                        <div className="w-24 h-4 rounded bg-blue-500/10 flex items-center justify-center">
+                          <span className="text-[6px] text-blue-400 font-bold">CloudLunar</span>
                         </div>
                         <div className="flex gap-1 w-24">
                           <div className="flex-1 h-8 rounded bg-white/5" />
@@ -350,9 +350,9 @@ export default function GetStarted() {
                       Progressive Web Apps deliver the same experience as native apps — home screen icon, fullscreen mode, push notifications, and offline support — without the overhead of maintaining separate iOS and Android codebases. One codebase, instant updates, zero App Store fees.
                     </p>
                     <div className="flex flex-wrap gap-2">
-                      <span className="text-[10px] px-2.5 py-1 rounded-full bg-indigo-500/10 text-indigo-300 border border-indigo-500/20">Same Codebase</span>
+                      <span className="text-[10px] px-2.5 py-1 rounded-full bg-blue-500/10 text-blue-300 border border-blue-500/20">Same Codebase</span>
                       <span className="text-[10px] px-2.5 py-1 rounded-full bg-green-500/10 text-green-300 border border-green-500/20">Works Offline</span>
-                      <span className="text-[10px] px-2.5 py-1 rounded-full bg-purple-500/10 text-purple-300 border border-purple-500/20">Push Notifications</span>
+                      <span className="text-[10px] px-2.5 py-1 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/20">Push Notifications</span>
                       <span className="text-[10px] px-2.5 py-1 rounded-full bg-amber-500/10 text-amber-300 border border-amber-500/20">Auto Updates</span>
                     </div>
                   </div>
@@ -365,7 +365,7 @@ export default function GetStarted() {
                   href={TOOL_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-8 py-3.5 bg-gradient-to-r from-cyan-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 text-white font-semibold rounded-xl transition-all hover:shadow-lg hover:shadow-cyan-500/25 hover:-translate-y-0.5"
+                  className="inline-flex items-center gap-2 px-8 py-3.5 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-semibold rounded-xl transition-all hover:shadow-lg hover:shadow-cyan-500/25 hover:-translate-y-0.5"
                 >
                   Open Dashboard to Install <ExternalLink className="w-4 h-4" />
                 </a>
@@ -378,7 +378,7 @@ export default function GetStarted() {
           {activePlatform === "cloud" && (
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }}>
               <div className="flex items-center gap-2 mb-4">
-                <Monitor className="w-5 h-5 text-purple-400" />
+                <Monitor className="w-5 h-5 text-cyan-400" />
                 <h3 className="text-sm font-semibold text-white">Hosted Dashboard</h3>
               </div>
               <p className="text-sm text-gray-400 mb-6">
@@ -386,15 +386,15 @@ export default function GetStarted() {
               </p>
 
               <div className="grid md:grid-cols-2 gap-4 mb-6">
-                <div className="bg-gradient-to-br from-indigo-600/10 to-purple-600/10 border border-indigo-500/20 rounded-xl p-6 text-center">
-                  <Monitor className="w-8 h-8 text-indigo-400 mx-auto mb-3" />
+                <div className="bg-gradient-to-br from-blue-600/10 to-cyan-600/10 border border-blue-500/20 rounded-xl p-6 text-center">
+                  <Monitor className="w-8 h-8 text-blue-400 mx-auto mb-3" />
                   <h4 className="text-sm font-bold text-white mb-2">Web Dashboard</h4>
                   <p className="text-xs text-gray-400 mb-4">Full-featured dashboard accessible from any browser. Connect your AWS account and start scanning immediately.</p>
                   <a
                     href={TOOL_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white text-sm font-medium rounded-xl transition-all hover:shadow-lg hover:shadow-indigo-500/25"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white text-sm font-medium rounded-xl transition-all hover:shadow-lg hover:shadow-blue-500/25"
                   >
                     Open Dashboard <ExternalLink className="w-4 h-4" />
                   </a>
@@ -440,7 +440,7 @@ export default function GetStarted() {
               <GitBranch className="w-6 h-6 text-gray-400 group-hover:text-white transition-colors" />
             </div>
             <div>
-              <p className="text-sm font-semibold text-white group-hover:text-indigo-300 transition-colors">Source Code</p>
+              <p className="text-sm font-semibold text-white group-hover:text-blue-300 transition-colors">Source Code</p>
               <p className="text-[11px] text-gray-500">View on GitHub</p>
             </div>
             <ExternalLink className="w-4 h-4 text-gray-600 ml-auto" />

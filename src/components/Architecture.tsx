@@ -32,8 +32,8 @@ const layers = [
     title: "API Layer",
     subtitle: "FastAPI + Async Python",
     icon: Server,
-    color: "from-indigo-500 to-purple-500",
-    borderColor: "border-indigo-500/30",
+    color: "from-blue-500 to-purple-500",
+    borderColor: "border-blue-500/30",
     tech: ["FastAPI", "SQLAlchemy", "Pydantic", "Structlog"],
     items: [
       "RESTful API with JWT auth",
@@ -46,8 +46,8 @@ const layers = [
     title: "Optimization Engine",
     subtitle: "Rules + Compliance",
     icon: Cpu,
-    color: "from-purple-500 to-pink-500",
-    borderColor: "border-purple-500/30",
+    color: "from-cyan-500 to-blue-500",
+    borderColor: "border-cyan-500/30",
     tech: ["25+ rules", "P95 analysis", "CIS/SOC2", "Confidence scoring"],
     items: [
       "25+ optimization rule checks",
@@ -93,7 +93,7 @@ export default function Architecture() {
 
   return (
     <section id="architecture" className="relative py-28 md:py-36 bg-grid">
-      <div className="absolute inset-0 bg-gradient-to-b from-[#030014] via-transparent to-[#030014] pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#030712] via-transparent to-[#030712] pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         <motion.div
@@ -102,7 +102,7 @@ export default function Architecture() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <span className="text-purple-400 text-sm font-semibold tracking-widest uppercase">Under the Hood</span>
+          <span className="text-cyan-400 text-sm font-semibold tracking-widest uppercase">Under the Hood</span>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mt-3 mb-6">
             Architecture &<br />
             <span className="text-gradient">Tech Stack</span>
@@ -117,7 +117,7 @@ export default function Architecture() {
               onClick={() => setView("architecture")}
               className={`px-5 py-2.5 rounded-xl text-sm font-medium transition-all ${
                 view === "architecture"
-                  ? "bg-indigo-500/20 text-indigo-300 border border-indigo-500/30"
+                  ? "bg-blue-500/20 text-blue-300 border border-blue-500/30"
                   : "glass text-gray-400 hover:text-white"
               }`}
             >
@@ -128,7 +128,7 @@ export default function Architecture() {
               onClick={() => setView("stack")}
               className={`px-5 py-2.5 rounded-xl text-sm font-medium transition-all ${
                 view === "stack"
-                  ? "bg-indigo-500/20 text-indigo-300 border border-indigo-500/30"
+                  ? "bg-blue-500/20 text-blue-300 border border-blue-500/30"
                   : "glass text-gray-400 hover:text-white"
               }`}
             >
@@ -161,7 +161,7 @@ export default function Architecture() {
             {pipeline.map((step, i) => (
               <React.Fragment key={step.step}>
                 <div className="flex items-center gap-3 glass rounded-xl px-5 py-3 min-w-[200px]">
-                  <div className="w-8 h-8 rounded-lg bg-indigo-600/30 flex items-center justify-center text-indigo-400 font-bold text-sm">
+                  <div className="w-8 h-8 rounded-lg bg-blue-600/30 flex items-center justify-center text-blue-400 font-bold text-sm">
                     {step.step}
                   </div>
                   <div>
@@ -170,7 +170,7 @@ export default function Architecture() {
                   </div>
                 </div>
                 {i < pipeline.length - 1 && (
-                  <ArrowRight className="w-5 h-5 text-indigo-500/50 hidden md:block flex-shrink-0" />
+                  <ArrowRight className="w-5 h-5 text-blue-500/50 hidden md:block flex-shrink-0" />
                 )}
               </React.Fragment>
             ))}
@@ -202,7 +202,7 @@ export default function Architecture() {
                   <ul className="space-y-2">
                     {layer.items.map((item) => (
                       <li key={item} className="text-sm text-gray-400 flex items-start gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-indigo-500/60 mt-1.5 flex-shrink-0" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-blue-500/60 mt-1.5 flex-shrink-0" />
                         {item}
                       </li>
                     ))}
@@ -271,7 +271,7 @@ export default function Architecture() {
                   <tbody>
                     {[
                       { name: "Next.js Frontend", cpu: "~0.5 core", mem: "150-250 MB", disk: "~500 MB", note: "Static assets + SSR", icon: Monitor, color: "text-cyan-400" },
-                      { name: "FastAPI Backend", cpu: "~0.5 core", mem: "200-300 MB", disk: "~100 MB", note: "Async uvicorn workers", icon: Server, color: "text-indigo-400" },
+                      { name: "FastAPI Backend", cpu: "~0.5 core", mem: "200-300 MB", disk: "~100 MB", note: "Async uvicorn workers", icon: Server, color: "text-blue-400" },
                       { name: "PostgreSQL", cpu: "~0.3 core", mem: "256-512 MB", disk: "1-5 GB", note: "Scales with data volume", icon: Database, color: "text-green-400" },
                       { name: "Redis", cpu: "~0.1 core", mem: "50-100 MB", disk: "~50 MB", note: "Session cache & queues", icon: Zap, color: "text-amber-400" },
                       { name: "CloudLunar Agent", cpu: "< 0.01 core", mem: "25-40 MB", disk: "0", note: "Runs on monitored servers", icon: Radio, color: "text-teal-400" },
@@ -312,7 +312,7 @@ export default function Architecture() {
               >
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-500 flex items-center justify-center">
+                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-blue-500 flex items-center justify-center">
                       <Server className="w-5 h-5 text-white" />
                     </div>
                     <div>
@@ -355,10 +355,10 @@ export default function Architecture() {
                 className="glass-card p-6 hover:bg-white/[0.06] transition-all relative"
               >
                 <div className="absolute top-3 right-3">
-                  <span className="text-[10px] px-2.5 py-1 rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/20 font-semibold">Recommended</span>
+                  <span className="text-[10px] px-2.5 py-1 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 font-semibold">Recommended</span>
                 </div>
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center">
                     <Gauge className="w-5 h-5 text-white" />
                   </div>
                   <div>
@@ -394,8 +394,8 @@ export default function Architecture() {
             {/* Key Highlights */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {[
-                { icon: Cpu, label: "Total CPU", value: "< 1.5 cores", desc: "All services combined", color: "text-indigo-400", bg: "bg-indigo-500/10" },
-                { icon: HardDrive, label: "Total RAM", value: "< 1.2 GB", desc: "Under full load", color: "text-purple-400", bg: "bg-purple-500/10" },
+                { icon: Cpu, label: "Total CPU", value: "< 1.5 cores", desc: "All services combined", color: "text-blue-400", bg: "bg-blue-500/10" },
+                { icon: HardDrive, label: "Total RAM", value: "< 1.2 GB", desc: "Under full load", color: "text-cyan-400", bg: "bg-cyan-500/10" },
                 { icon: Radio, label: "Agent Footprint", value: "~30 MB", desc: "< 1% CPU, zero disk", color: "text-teal-400", bg: "bg-teal-500/10" },
                 { icon: DollarSign, label: "Hosting Cost", value: "From $15/mo", desc: "t3.small is enough", color: "text-emerald-400", bg: "bg-emerald-500/10" },
               ].map((stat) => (

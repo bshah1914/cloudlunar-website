@@ -8,7 +8,7 @@ interface SectionHeaderProps {
   subtitle?: string;
 }
 
-export default function SectionHeader({ badge, badgeColor = "text-indigo-400", title, subtitle }: SectionHeaderProps) {
+export default function SectionHeader({ badge, badgeColor = "text-blue-400", title, subtitle }: SectionHeaderProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}

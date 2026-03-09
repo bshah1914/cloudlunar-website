@@ -38,8 +38,12 @@ const categories = [
     name: "Platform",
     features: [
       { feature: "Multi-tenant SaaS", cloudlunar: true, toolA: false, toolB: true },
-      { feature: "Compliance monitoring", cloudlunar: true, toolA: false, toolB: "partial" },
+      { feature: "Compliance monitoring (CIS, SOC2)", cloudlunar: true, toolA: false, toolB: "partial" },
+      { feature: "Cost anomaly detection", cloudlunar: true, toolA: false, toolB: false },
+      { feature: "Tag-based cost allocation", cloudlunar: true, toolA: "partial", toolB: true },
+      { feature: "Cross-platform agent (Linux/macOS/Win)", cloudlunar: true, toolA: false, toolB: false },
       { feature: "Budget alerts", cloudlunar: true, toolA: true, toolB: true },
+      { feature: "System logs & audit trail", cloudlunar: true, toolA: false, toolB: "partial" },
       { feature: "One-click actions", cloudlunar: true, toolA: false, toolB: false },
       { feature: "Open source", cloudlunar: true, toolA: false, toolB: false },
     ],
@@ -56,11 +60,11 @@ function CellValue({ value }: { value: boolean | string }) {
 export default function Comparison() {
   return (
     <section className="relative py-28 md:py-36">
-      <div className="absolute inset-0 bg-gradient-to-b from-[#030014] via-surface-800/20 to-[#030014] pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#030712] via-surface-800/20 to-[#030712] pointer-events-none" />
 
       <div className="relative z-10 max-w-5xl mx-auto px-6">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-          <span className="text-rose-400 text-sm font-semibold tracking-widest uppercase">Comparison</span>
+          <span className="text-blue-400 text-sm font-semibold tracking-widest uppercase">Comparison</span>
           <h2 className="text-4xl md:text-5xl font-bold text-white mt-3 mb-6">
             How CloudLunar Compares
           </h2>
@@ -70,7 +74,6 @@ export default function Comparison() {
         </motion.div>
 
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="glass-card overflow-x-auto">
-          {/* Header */}
           <div className="grid grid-cols-4 gap-4 px-6 py-4 border-b border-white/10 bg-white/[0.02]">
             <div className="text-sm text-gray-500 font-medium">Feature</div>
             <div className="text-center">

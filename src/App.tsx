@@ -10,13 +10,14 @@ import HowItWorksPage from "./pages/HowItWorksPage";
 import PricingPage from "./pages/PricingPage";
 import DownloadPage from "./pages/DownloadPage";
 import DocsPage from "./pages/DocsPage";
-import NewsPage from "./pages/NewsPage";
+import ContactPage from "./pages/ContactPage";
 import BlogPage from "./pages/BlogPage";
+import NewsPage from "./pages/NewsPage";
 
 function App() {
   return (
     <Router>
-      <div className="min-h-screen bg-[#06070a] text-gray-200 overflow-x-hidden noise-bg">
+      <div className="min-h-screen bg-[#030712] text-gray-200 overflow-x-hidden noise-bg">
         <Navbar />
         <AnimatePresence mode="wait">
           <Routes>
@@ -27,8 +28,9 @@ function App() {
             <Route path="/pricing" element={<PricingPage />} />
             <Route path="/download" element={<DownloadPage />} />
             <Route path="/docs" element={<DocsPage />} />
-            <Route path="/news" element={<NewsPage />} />
             <Route path="/blog" element={<BlogPage />} />
+            <Route path="/news" element={<NewsPage />} />
+            <Route path="/contact" element={<ContactPage />} />
           </Routes>
         </AnimatePresence>
         <Footer />

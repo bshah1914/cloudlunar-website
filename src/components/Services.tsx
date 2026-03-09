@@ -15,7 +15,7 @@ const services = [
   { icon: Radio, name: "Elastic IPs", type: "Network", checks: ["Unassociated EIP billing ($3.65/mo)", "Release recommendation", "Instance association check"], color: "text-rose-400", bg: "bg-rose-500/10" },
   { icon: Network, name: "Load Balancers", type: "Network", checks: ["ALB/NLB idle detection (0 healthy targets)", "Classic ELB with 0 instances", "Base cost analysis ($16-18/mo)"], color: "text-cyan-400", bg: "bg-cyan-500/10" },
   { icon: CloudLightning, name: "Lambda Functions", type: "Compute", checks: ["Unused functions (0 invocations/30d)", "Memory over-provisioning", "Duration-based rightsizing", "Code cleanup recommendations"], color: "text-yellow-400", bg: "bg-yellow-500/10" },
-  { icon: Workflow, name: "NAT Gateways", type: "Network", checks: ["Low-traffic detection", "VPC Endpoint alternative", "Base cost analysis ($32.85/mo)"], color: "text-indigo-400", bg: "bg-indigo-500/10" },
+  { icon: Workflow, name: "NAT Gateways", type: "Network", checks: ["Low-traffic detection", "VPC Endpoint alternative", "Base cost analysis ($32.85/mo)"], color: "text-blue-400", bg: "bg-blue-500/10" },
   { icon: Camera, name: "EBS Snapshots", type: "Storage", checks: ["Old snapshots (90+ days)", "Storage cost per GB ($0.05/GB/mo)", "Source volume validation"], color: "text-amber-400", bg: "bg-amber-500/10" },
   { icon: Layers, name: "DynamoDB Tables", type: "Database", checks: ["Over-provisioned RCU/WCU", "On-demand billing switch", "Capacity utilization analysis", "GSI cost review"], color: "text-teal-400", bg: "bg-teal-500/10" },
   { icon: MonitorSpeaker, name: "ElastiCache", type: "Database", checks: ["Idle cluster detection (low CPU + connections)", "Node type rightsizing", "Engine-aware analysis (Redis/Memcached)"], color: "text-red-400", bg: "bg-red-500/10" },
@@ -46,7 +46,7 @@ export default function Services() {
 
   return (
     <section id="services" className="relative py-28 md:py-36">
-      <div className="absolute inset-0 bg-gradient-to-b from-[#06070a] via-transparent to-[#06070a] pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#030712] via-transparent to-[#030712] pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
@@ -90,7 +90,7 @@ export default function Services() {
                       <motion.ul initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mt-3 space-y-1.5">
                         {svc.checks.map((check) => (
                           <li key={check} className="text-xs text-gray-400 flex items-start gap-2">
-                            <span className="w-1 h-1 bg-indigo-500 rounded-full mt-1.5 flex-shrink-0" />
+                            <span className="w-1 h-1 bg-blue-500 rounded-full mt-1.5 flex-shrink-0" />
                             {check}
                           </li>
                         ))}

@@ -1,304 +1,315 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
-import { Clock, User, ArrowRight, BookOpen } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Clock, User, ArrowRight, BookOpen, Search, Tag, Sparkles } from "lucide-react";
 
-const categories = ["All", "Cost Optimization", "Security", "DevOps", "Tutorials"];
+const categories = ["All", "Cost Optimization", "Security", "DevOps", "Kubernetes", "Tutorials", "AI & Cloud"];
 
 const blogPosts = [
   {
-    id: 1,
-    category: "Cost Optimization",
+    id: 1, category: "Cost Optimization",
     title: "How We Reduced AWS Costs by 47% Without Sacrificing Performance",
-    excerpt:
-      "Discover the strategies and tooling our team used to cut nearly half of a client's monthly cloud spend. From right-sizing instances to leveraging spot fleets, every optimization added up.",
-    author: "CloudLunar Team",
-    authorInitials: "CL",
-    readTime: "8 min read",
-    date: "Mar 5, 2026",
-    featured: true,
-    accentGradient: "from-violet-500 to-blue-500",
+    excerpt: "Discover the strategies and tooling our team used to cut nearly half of a client's monthly cloud spend. From right-sizing instances to leveraging spot fleets, every optimization added up.",
+    author: "CloudLunar Team", authorInitials: "CL", readTime: "8 min read", date: "Mar 5, 2026",
+    featured: true, gradient: "from-blue-500 to-cyan-500",
   },
   {
-    id: 2,
-    category: "Security",
+    id: 2, category: "Security",
     title: "Achieving SOC 2 Compliance on AWS: A Practical Roadmap",
-    excerpt:
-      "SOC 2 can feel overwhelming, but it doesn't have to be. We break down every trust service criterion and map it to specific AWS services and configurations.",
-    author: "Priya Sharma",
-    authorInitials: "PS",
-    readTime: "6 min read",
-    date: "Feb 28, 2026",
-    featured: false,
-    accentGradient: "from-blue-500 to-emerald-500",
+    excerpt: "SOC 2 can feel overwhelming, but it doesn't have to be. We break down every trust service criterion and map it to specific AWS services and configurations.",
+    author: "Priya Sharma", authorInitials: "PS", readTime: "6 min read", date: "Feb 28, 2026",
+    featured: false, gradient: "from-emerald-500 to-teal-500",
   },
   {
-    id: 3,
-    category: "DevOps",
+    id: 3, category: "DevOps",
     title: "Building a Zero-Downtime CI/CD Pipeline with GitHub Actions and ECS",
-    excerpt:
-      "Learn how to set up blue-green deployments on Amazon ECS using GitHub Actions. This guide covers task definitions, target groups, and automated rollback.",
-    author: "Alex Chen",
-    authorInitials: "AC",
-    readTime: "10 min read",
-    date: "Feb 20, 2026",
-    featured: false,
-    accentGradient: "from-emerald-500 to-violet-500",
+    excerpt: "Learn how to set up blue-green deployments on Amazon ECS using GitHub Actions. This guide covers task definitions, target groups, and automated rollback.",
+    author: "Alex Chen", authorInitials: "AC", readTime: "10 min read", date: "Feb 20, 2026",
+    featured: false, gradient: "from-amber-500 to-orange-500",
   },
   {
-    id: 4,
-    category: "Tutorials",
+    id: 4, category: "Tutorials",
     title: "Terraform Modules for Multi-Account AWS Organizations",
-    excerpt:
-      "Managing dozens of AWS accounts manually is unsustainable. In this tutorial, we walk through reusable Terraform modules that enforce guardrails across every account.",
-    author: "Jordan Lee",
-    authorInitials: "JL",
-    readTime: "12 min read",
-    date: "Feb 14, 2026",
-    featured: false,
-    accentGradient: "from-violet-500 to-emerald-500",
+    excerpt: "Managing dozens of AWS accounts manually is unsustainable. In this tutorial, we walk through reusable Terraform modules that enforce guardrails across every account.",
+    author: "Jordan Lee", authorInitials: "JL", readTime: "12 min read", date: "Feb 14, 2026",
+    featured: false, gradient: "from-blue-600 to-indigo-500",
   },
   {
-    id: 5,
-    category: "Cost Optimization",
+    id: 5, category: "Cost Optimization",
     title: "Reserved Instances vs Savings Plans: Which One Is Right for You?",
-    excerpt:
-      "AWS offers multiple commitment-based discount models, but choosing the wrong one can lock you into unused capacity. We compare flexibility, savings rates, and ideal use cases.",
-    author: "CloudLunar Team",
-    authorInitials: "CL",
-    readTime: "5 min read",
-    date: "Jan 30, 2026",
-    featured: false,
-    accentGradient: "from-blue-500 to-violet-500",
+    excerpt: "AWS offers multiple commitment-based discount models, but choosing the wrong one can lock you into unused capacity. We compare flexibility, savings rates, and ideal use cases.",
+    author: "CloudLunar Team", authorInitials: "CL", readTime: "5 min read", date: "Jan 30, 2026",
+    featured: false, gradient: "from-cyan-500 to-teal-500",
   },
   {
-    id: 6,
-    category: "Security",
+    id: 6, category: "Security",
     title: "Implementing Least-Privilege IAM Policies at Scale",
-    excerpt:
-      "Overly permissive IAM policies are one of the top security risks in cloud environments. Here is a systematic approach to auditing and tightening permissions without breaking workloads.",
-    author: "Priya Sharma",
-    authorInitials: "PS",
-    readTime: "7 min read",
-    date: "Jan 22, 2026",
-    featured: false,
-    accentGradient: "from-emerald-500 to-blue-500",
+    excerpt: "Overly permissive IAM policies are one of the top security risks in cloud environments. Here is a systematic approach to auditing and tightening permissions without breaking workloads.",
+    author: "Priya Sharma", authorInitials: "PS", readTime: "7 min read", date: "Jan 22, 2026",
+    featured: false, gradient: "from-emerald-500 to-green-500",
   },
   {
-    id: 7,
-    category: "DevOps",
-    title: "Observability-Driven Development: Beyond Logs and Metrics",
-    excerpt:
-      "Traces, structured logs, and SLOs form the backbone of modern observability. We explore how to instrument applications so your team can debug production issues in minutes, not hours.",
-    author: "Alex Chen",
-    authorInitials: "AC",
-    readTime: "9 min read",
-    date: "Jan 15, 2026",
-    featured: false,
-    accentGradient: "from-violet-500 to-blue-500",
+    id: 7, category: "Kubernetes",
+    title: "EKS Cost Optimization: Right-Sizing Pods and Nodes for Real Savings",
+    excerpt: "Kubernetes clusters are notorious for over-provisioning. Learn how to analyze pod resource requests vs actual usage and implement Karpenter for intelligent node scaling.",
+    author: "Alex Chen", authorInitials: "AC", readTime: "9 min read", date: "Jan 15, 2026",
+    featured: true, gradient: "from-indigo-500 to-blue-500",
   },
   {
-    id: 8,
-    category: "Tutorials",
+    id: 8, category: "Tutorials",
     title: "Automating AWS Cost Reports with Lambda and QuickSight",
-    excerpt:
-      "Stay on top of your cloud spending by building automated cost dashboards. This step-by-step tutorial uses Lambda to aggregate Cost Explorer data and QuickSight to visualize it.",
-    author: "Jordan Lee",
-    authorInitials: "JL",
-    readTime: "11 min read",
-    date: "Jan 8, 2026",
-    featured: false,
-    accentGradient: "from-blue-500 to-emerald-500",
+    excerpt: "Stay on top of your cloud spending by building automated cost dashboards. This step-by-step tutorial uses Lambda to aggregate Cost Explorer data and QuickSight to visualize it.",
+    author: "Jordan Lee", authorInitials: "JL", readTime: "11 min read", date: "Jan 8, 2026",
+    featured: false, gradient: "from-teal-500 to-emerald-500",
+  },
+  {
+    id: 9, category: "AI & Cloud",
+    title: "Managing AI Inference Costs: GPU Instance Strategies for Production ML",
+    excerpt: "GPU instances are expensive. We explore spot vs on-demand strategies, multi-model serving, model distillation, and auto-scaling patterns to keep inference costs under control.",
+    author: "CloudLunar Team", authorInitials: "CL", readTime: "10 min read", date: "Dec 28, 2025",
+    featured: true, gradient: "from-cyan-500 to-blue-500",
+  },
+  {
+    id: 10, category: "DevOps",
+    title: "Observability-Driven Development: Beyond Logs and Metrics",
+    excerpt: "Traces, structured logs, and SLOs form the backbone of modern observability. We explore how to instrument applications so your team can debug production issues in minutes.",
+    author: "Alex Chen", authorInitials: "AC", readTime: "9 min read", date: "Dec 20, 2025",
+    featured: false, gradient: "from-amber-500 to-yellow-500",
+  },
+  {
+    id: 11, category: "Kubernetes",
+    title: "Service Mesh vs Sidecar-Free: Choosing the Right Networking Model for K8s",
+    excerpt: "With Istio ambient mesh and Cilium gaining traction, the sidecar debate is evolving. We compare latency, resource overhead, and operational complexity of each approach.",
+    author: "Priya Sharma", authorInitials: "PS", readTime: "8 min read", date: "Dec 12, 2025",
+    featured: false, gradient: "from-indigo-500 to-violet-500",
+  },
+  {
+    id: 12, category: "AI & Cloud",
+    title: "Building RAG Pipelines on AWS: Architecture Patterns and Cost Analysis",
+    excerpt: "Retrieval-Augmented Generation is the backbone of enterprise AI. We break down architecture options using Bedrock, OpenSearch, and Lambda — with real cost projections.",
+    author: "Jordan Lee", authorInitials: "JL", readTime: "13 min read", date: "Dec 5, 2025",
+    featured: false, gradient: "from-blue-500 to-cyan-500",
   },
 ];
 
-const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
+const categoryColors: Record<string, string> = {
+  "Cost Optimization": "bg-blue-500/10 text-blue-400 border-blue-500/20",
+  Security: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
+  DevOps: "bg-amber-500/10 text-amber-400 border-amber-500/20",
+  Kubernetes: "bg-indigo-500/10 text-indigo-400 border-indigo-500/20",
+  Tutorials: "bg-teal-500/10 text-teal-400 border-teal-500/20",
+  "AI & Cloud": "bg-cyan-500/10 text-cyan-400 border-cyan-500/20",
 };
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: "easeOut" as const },
-  },
-};
-
-function BlogCard({
-  post,
-  featured = false,
-}: {
-  post: (typeof blogPosts)[0];
-  featured?: boolean;
-}) {
-  return (
-    <motion.article
-      variants={cardVariants}
-      className={`glass-card-hover relative group overflow-hidden rounded-2xl flex flex-col ${
-        featured ? "md:col-span-2 lg:col-span-3" : ""
-      }`}
-    >
-      {/* Gradient accent line */}
-      <div
-        className={`h-1 w-full bg-gradient-to-r ${post.accentGradient}`}
-      />
-
-      {/* Featured gradient border effect */}
-      {featured && (
-        <div className="absolute inset-0 rounded-2xl pointer-events-none border border-transparent bg-gradient-to-br from-violet-500/20 via-blue-500/10 to-emerald-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-      )}
-
-      <div className={`p-6 ${featured ? "md:p-10" : ""} flex flex-col flex-1`}>
-        {/* Category tag */}
-        <span className="inline-block self-start text-xs font-semibold uppercase tracking-wider px-3 py-1 rounded-full bg-white/5 text-violet-400 border border-violet-500/20 mb-4">
-          {post.category}
-        </span>
-
-        {/* Title */}
-        <h3
-          className={`font-bold text-white mb-3 leading-tight ${
-            featured ? "text-2xl md:text-3xl" : "text-lg"
-          }`}
-        >
-          {post.title}
-        </h3>
-
-        {/* Excerpt */}
-        <p
-          className={`text-gray-400 mb-6 leading-relaxed flex-1 ${
-            featured ? "text-base md:text-lg" : "text-sm"
-          }`}
-        >
-          {post.excerpt}
-        </p>
-
-        {/* Meta row */}
-        <div className="flex items-center justify-between mt-auto pt-4 border-t border-white/5">
-          <div className="flex items-center gap-3">
-            {/* Author avatar */}
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-violet-500 to-blue-500 flex items-center justify-center text-xs font-bold text-white">
-              {post.authorInitials}
-            </div>
-            <div className="flex flex-col">
-              <span className="text-sm text-gray-300">{post.author}</span>
-              <span className="text-xs text-gray-500">{post.date}</span>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-3 text-gray-500 text-xs">
-            <span className="flex items-center gap-1">
-              <Clock className="w-3.5 h-3.5" />
-              {post.readTime}
-            </span>
-          </div>
-        </div>
-
-        {/* Read more link */}
-        <div className="mt-4">
-          <span className="inline-flex items-center gap-1.5 text-sm font-medium text-violet-400 group-hover:text-violet-300 transition-colors cursor-pointer">
-            Read article
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </span>
-        </div>
-      </div>
-    </motion.article>
-  );
-}
 
 export default function Blog() {
   const [activeCategory, setActiveCategory] = useState("All");
+  const [searchQuery, setSearchQuery] = useState("");
 
-  const filteredPosts =
-    activeCategory === "All"
-      ? blogPosts
-      : blogPosts.filter((p) => p.category === activeCategory);
+  const filteredPosts = blogPosts
+    .filter((p) => activeCategory === "All" || p.category === activeCategory)
+    .filter((p) =>
+      searchQuery === "" ||
+      p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      p.excerpt.toLowerCase().includes(searchQuery.toLowerCase())
+    );
 
-  const featuredPost = filteredPosts[0];
-  const remainingPosts = filteredPosts.slice(1);
+  const featuredPosts = filteredPosts.filter((p) => p.featured);
+  const regularPosts = filteredPosts.filter((p) => !p.featured);
 
   return (
-    <section className="relative py-24 px-4 sm:px-6 lg:px-8 bg-[#06070a] min-h-screen">
-      {/* Background glow */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-violet-600/5 rounded-full blur-[120px]" />
-      </div>
+    <section className="relative py-28 md:py-36 min-h-screen">
+      <div className="absolute inset-0 bg-gradient-to-b from-[#030712] via-[#040a18] to-[#030712] pointer-events-none" />
+      <div className="absolute top-[20%] right-[15%] w-[500px] h-[500px] bg-blue-600/[0.03] rounded-full blur-[200px]" />
+      <div className="absolute bottom-[15%] left-[20%] w-[400px] h-[400px] bg-cyan-600/[0.03] rounded-full blur-[160px]" />
 
-      <div className="relative max-w-7xl mx-auto">
-        {/* Section header */}
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-sm text-gray-400 mb-6">
-            <BookOpen className="w-4 h-4 text-violet-400" />
-            Insights &amp; Resources
-          </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Blog
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-6"
+          >
+            <BookOpen className="w-4 h-4 text-cyan-400" />
+            <span className="text-sm text-gray-300 font-medium">Insights & Resources</span>
+          </motion.div>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+            CloudLunar <span className="text-gradient">Blog</span>
           </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Expert perspectives on cloud cost optimization, security best
-            practices, and modern DevOps workflows.
+          <p className="text-gray-400 max-w-2xl mx-auto text-lg leading-relaxed">
+            Expert perspectives on cloud cost optimization, Kubernetes, security best practices, AI infrastructure, and modern DevOps workflows.
           </p>
         </motion.div>
 
-        {/* Category filter tabs */}
+        {/* Search */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="flex flex-wrap justify-center gap-2 mb-12"
+          viewport={{ once: true }}
+          className="max-w-xl mx-auto mb-10"
+        >
+          <div className="relative">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search articles..."
+              className="w-full pl-12 pr-4 py-3.5 bg-white/5 border border-white/10 rounded-2xl text-sm text-white placeholder-gray-500 focus:outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/20 transition-all"
+            />
+          </div>
+        </motion.div>
+
+        {/* Category Filters */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="flex flex-wrap justify-center gap-2 mb-14"
         >
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
-              className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 flex items-center gap-1.5 ${
                 activeCategory === cat
-                  ? "bg-gradient-to-r from-violet-600 to-blue-600 text-white shadow-lg shadow-violet-500/20"
-                  : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-gray-200 border border-white/5"
+                  ? "bg-blue-500/15 text-white border border-blue-500/30 shadow-lg shadow-blue-500/10"
+                  : "text-gray-400 border border-white/5 hover:text-white hover:border-white/15 hover:bg-white/[0.03]"
               }`}
             >
+              {cat === "All" ? <Tag className="w-3.5 h-3.5" /> : null}
               {cat}
+              <span className="text-[10px] text-gray-600 ml-0.5">
+                ({cat === "All" ? blogPosts.length : blogPosts.filter((p) => p.category === cat).length})
+              </span>
             </button>
           ))}
         </motion.div>
 
-        {/* Blog grid */}
-        {filteredPosts.length > 0 && (
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-          >
-            {/* Featured card */}
-            {featuredPost && (
-              <BlogCard post={featuredPost} featured />
-            )}
+        {/* Featured Posts */}
+        {featuredPosts.length > 0 && (
+          <div className="mb-12">
+            <div className="flex items-center gap-2 mb-6">
+              <Sparkles className="w-4 h-4 text-cyan-400" />
+              <h3 className="text-sm font-semibold text-white uppercase tracking-wider">Featured Articles</h3>
+            </div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {featuredPosts.map((post, i) => (
+                <motion.article
+                  key={post.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  whileHover={{ y: -6 }}
+                  className="glass-card group relative overflow-hidden cursor-pointer hover:border-white/[0.12] transition-all duration-500"
+                >
+                  {/* Gradient top bar */}
+                  <div className={`h-1 w-full bg-gradient-to-r ${post.gradient}`} />
 
-            {/* Remaining cards */}
-            {remainingPosts.map((post) => (
-              <BlogCard key={post.id} post={post} />
-            ))}
-          </motion.div>
-        )}
+                  <div className="p-7">
+                    <div className="flex items-center gap-2 mb-4">
+                      <span className={`text-[10px] px-2.5 py-1 rounded-full border ${categoryColors[post.category] || "bg-white/5 text-gray-400 border-white/10"} font-semibold`}>
+                        {post.category}
+                      </span>
+                      <span className="text-[10px] text-gray-600">{post.date}</span>
+                    </div>
 
-        {filteredPosts.length === 0 && (
-          <div className="text-center py-20 text-gray-500">
-            No posts found in this category.
+                    <h3 className="text-lg font-semibold text-white mb-3 leading-snug group-hover:text-cyan-300 transition-colors">
+                      {post.title}
+                    </h3>
+                    <p className="text-sm text-gray-400 leading-relaxed mb-5">{post.excerpt}</p>
+
+                    <div className="flex items-center justify-between pt-4 border-t border-white/5">
+                      <div className="flex items-center gap-2.5">
+                        <div className={`w-7 h-7 rounded-full bg-gradient-to-br ${post.gradient} flex items-center justify-center text-[10px] font-bold text-white`}>
+                          {post.authorInitials}
+                        </div>
+                        <div>
+                          <p className="text-xs text-gray-300">{post.author}</p>
+                          <div className="flex items-center gap-1 text-[10px] text-gray-600">
+                            <Clock className="w-3 h-3" /> {post.readTime}
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-1 text-xs font-medium text-blue-400 group-hover:text-cyan-400 transition-colors">
+                        Read
+                        <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                      </div>
+                    </div>
+                  </div>
+                </motion.article>
+              ))}
+            </div>
           </div>
         )}
+
+        {/* Regular Posts Grid */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeCategory + searchQuery}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            {regularPosts.length > 0 ? (
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+                {regularPosts.map((post, i) => (
+                  <motion.article
+                    key={post.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.05 }}
+                    whileHover={{ y: -4 }}
+                    className="glass-card p-6 group cursor-pointer hover:border-white/[0.10] transition-all duration-300"
+                  >
+                    <div className="flex items-center gap-2 mb-3">
+                      <span className={`text-[10px] px-2 py-0.5 rounded-full border ${categoryColors[post.category] || "bg-white/5 text-gray-400 border-white/10"} font-semibold`}>
+                        {post.category}
+                      </span>
+                      <span className="text-[10px] text-gray-600">{post.date}</span>
+                    </div>
+
+                    <h3 className="text-sm font-semibold text-white mb-2 leading-snug group-hover:text-cyan-300 transition-colors">
+                      {post.title}
+                    </h3>
+                    <p className="text-xs text-gray-400 leading-relaxed mb-4 line-clamp-3">{post.excerpt}</p>
+
+                    <div className="flex items-center justify-between pt-3 border-t border-white/5">
+                      <div className="flex items-center gap-2">
+                        <div className={`w-6 h-6 rounded-full bg-gradient-to-br ${post.gradient} flex items-center justify-center text-[9px] font-bold text-white`}>
+                          {post.authorInitials}
+                        </div>
+                        <span className="text-[10px] text-gray-500">{post.author}</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-[10px] text-gray-600">
+                        <Clock className="w-3 h-3" /> {post.readTime}
+                      </div>
+                    </div>
+                  </motion.article>
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-20">
+                <Search className="w-10 h-10 text-gray-600 mx-auto mb-4" />
+                <p className="text-gray-400 text-lg">No articles found.</p>
+                <button
+                  onClick={() => { setSearchQuery(""); setActiveCategory("All"); }}
+                  className="mt-4 text-sm text-blue-400 hover:text-cyan-400 transition-colors"
+                >
+                  Clear filters
+                </button>
+              </div>
+            )}
+          </motion.div>
+        </AnimatePresence>
       </div>
     </section>
   );

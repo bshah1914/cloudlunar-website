@@ -33,8 +33,8 @@ const steps = [
       "Tags, configuration, and status",
       "Region-aware scanning",
     ],
-    color: "from-violet-500 to-purple-500",
-    glowColor: "violet-500",
+    color: "from-blue-500 to-indigo-500",
+    glowColor: "blue-500",
   },
   {
     icon: LineChart,
@@ -47,8 +47,8 @@ const steps = [
       "P95 percentile evaluation",
       "90-day Cost Explorer trends",
     ],
-    color: "from-purple-500 to-pink-500",
-    glowColor: "purple-500",
+    color: "from-cyan-500 to-teal-500",
+    glowColor: "cyan-500",
   },
   {
     icon: Lightbulb,
@@ -98,10 +98,10 @@ export default function HowItWorks() {
     <section
       id="how-it-works"
       className="relative py-32 overflow-hidden"
-      style={{ backgroundColor: "#06070a" }}
+      style={{ backgroundColor: "#030712" }}
     >
       {/* Background ambient glow */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-purple-600/5 rounded-full blur-[180px] pointer-events-none" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-blue-600/5 rounded-full blur-[180px] pointer-events-none" />
       <div className="absolute bottom-1/4 left-1/4 w-[300px] h-[300px] bg-blue-600/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-1/3 right-1/4 w-[300px] h-[300px] bg-green-600/5 rounded-full blur-[120px] pointer-events-none" />
 
@@ -130,24 +130,24 @@ export default function HowItWorks() {
         <div className="relative">
           {/* Desktop: Horizontal connecting gradient line */}
           <div className="hidden lg:block absolute top-[52px] left-[10%] right-[10%] h-[2px]">
-            <div className="w-full h-full bg-gradient-to-r from-blue-500 via-purple-500 via-pink-500 via-amber-500 to-green-500 opacity-40 rounded-full" />
+            <div className="w-full h-full bg-gradient-to-r from-blue-500 via-cyan-500 via-teal-500 via-emerald-500 to-green-500 opacity-40 rounded-full" />
             <div
               className="absolute inset-0 rounded-full opacity-30"
               style={{
                 backgroundImage:
-                  "repeating-linear-gradient(to right, transparent, transparent 8px, #06070a 8px, #06070a 16px)",
+                  "repeating-linear-gradient(to right, transparent, transparent 8px, #030712 8px, #030712 16px)",
               }}
             />
           </div>
 
           {/* Mobile: Vertical connecting gradient line */}
           <div className="lg:hidden absolute left-[28px] top-[52px] bottom-[52px] w-[2px]">
-            <div className="w-full h-full bg-gradient-to-b from-blue-500 via-purple-500 via-pink-500 via-amber-500 to-green-500 opacity-40 rounded-full" />
+            <div className="w-full h-full bg-gradient-to-b from-blue-500 via-cyan-500 via-teal-500 via-emerald-500 to-green-500 opacity-40 rounded-full" />
             <div
               className="absolute inset-0 rounded-full opacity-30"
               style={{
                 backgroundImage:
-                  "repeating-linear-gradient(to bottom, transparent, transparent 8px, #06070a 8px, #06070a 16px)",
+                  "repeating-linear-gradient(to bottom, transparent, transparent 8px, #030712 8px, #030712 16px)",
               }}
             />
           </div>
@@ -171,7 +171,7 @@ export default function HowItWorks() {
                     <div
                       className={`w-14 h-14 rounded-full bg-gradient-to-br ${step.color} p-[2px] shadow-lg`}
                     >
-                      <div className="w-full h-full rounded-full bg-[#0c0d12] flex items-center justify-center">
+                      <div className="w-full h-full rounded-full bg-[#060d1f] flex items-center justify-center">
                         <span className="text-white font-bold text-sm">
                           {step.step}
                         </span>

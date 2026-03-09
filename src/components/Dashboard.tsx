@@ -44,7 +44,7 @@ export default function DashboardPreview() {
 
   return (
     <section id="dashboard" className="relative py-28 md:py-36 bg-grid">
-      <div className="absolute inset-0 bg-gradient-to-b from-[#030014] via-transparent to-[#030014] pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#030712] via-transparent to-[#030712] pointer-events-none" />
       <div className="absolute top-1/4 left-0 w-[500px] h-[500px] bg-green-600/5 rounded-full blur-[180px] animate-aurora" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
@@ -69,7 +69,7 @@ export default function DashboardPreview() {
               <div className="w-3 h-3 rounded-full bg-green-400" />
               <span className="text-xs text-gray-500 ml-3">CloudLunar Dashboard</span>
             </div>
-            <a href={TOOL_URL} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-xs text-indigo-400 hover:text-indigo-300 transition-colors">
+            <a href={TOOL_URL} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-xs text-blue-400 hover:text-blue-300 transition-colors">
               Open Real Dashboard <ExternalLink className="w-3 h-3" />
             </a>
           </div>
@@ -78,7 +78,7 @@ export default function DashboardPreview() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
             {[
               { label: "Monthly Spend", value: "$12,480", change: "-8.2%", icon: DollarSign, color: "text-green-400", up: false },
-              { label: "Potential Savings", value: "$3,847", change: "30.8%", icon: TrendingDown, color: "text-indigo-400", up: false },
+              { label: "Potential Savings", value: "$3,847", change: "30.8%", icon: TrendingDown, color: "text-blue-400", up: false },
               { label: "Recommendations", value: "47", change: "12 quick wins", icon: AlertTriangle, color: "text-amber-400", up: true },
               { label: "Implemented", value: "23", change: "$1,240 saved", icon: CheckCircle2, color: "text-emerald-400", up: true },
             ].map((stat) => (
@@ -103,7 +103,7 @@ export default function DashboardPreview() {
                 <h3 className="text-sm font-semibold text-gray-300">Top Recommendations</h3>
                 <div className="flex gap-1">
                   {tabs.map((tab) => (
-                    <button key={tab} onClick={() => setActiveTab(tab)} className={`px-3 py-1 rounded-lg text-[11px] transition-colors ${activeTab === tab ? "bg-indigo-500/20 text-indigo-300" : "text-gray-500 hover:text-gray-300"}`}>
+                    <button key={tab} onClick={() => setActiveTab(tab)} className={`px-3 py-1 rounded-lg text-[11px] transition-colors ${activeTab === tab ? "bg-blue-500/20 text-blue-300" : "text-gray-500 hover:text-gray-300"}`}>
                       {tab}
                     </button>
                   ))}
@@ -126,7 +126,7 @@ export default function DashboardPreview() {
                     <div className="flex items-center gap-3 flex-shrink-0 ml-4">
                       <div className="hidden sm:flex items-center gap-1.5">
                         <div className="w-12 h-1.5 rounded-full bg-white/5 overflow-hidden">
-                          <div className="h-full rounded-full bg-indigo-500" style={{ width: `${rec.confidence}%` }} />
+                          <div className="h-full rounded-full bg-blue-500" style={{ width: `${rec.confidence}%` }} />
                         </div>
                         <span className="text-[10px] text-gray-500">{rec.confidence}%</span>
                       </div>
@@ -164,11 +164,11 @@ export default function DashboardPreview() {
               </div>
 
               {/* Total Savings Card */}
-              <div className="bg-gradient-to-br from-indigo-600/20 to-purple-600/20 border border-indigo-500/20 rounded-xl p-5">
-                <p className="text-xs text-indigo-300 font-medium mb-1">Total Monthly Savings</p>
+              <div className="bg-gradient-to-br from-blue-600/20 to-cyan-600/20 border border-blue-500/20 rounded-xl p-5">
+                <p className="text-xs text-blue-300 font-medium mb-1">Total Monthly Savings</p>
                 <p className="text-3xl font-bold text-white">$3,847</p>
                 <p className="text-xs text-gray-400 mt-1">Across 47 recommendations</p>
-                <a href={TOOL_URL} target="_blank" rel="noopener noreferrer" className="mt-4 w-full flex items-center justify-center gap-2 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-medium rounded-lg transition-all">
+                <a href={TOOL_URL} target="_blank" rel="noopener noreferrer" className="mt-4 w-full flex items-center justify-center gap-2 py-2.5 bg-blue-600 hover:bg-blue-500 text-white text-xs font-medium rounded-lg transition-all">
                   View Full Dashboard <ExternalLink className="w-3 h-3" />
                 </a>
               </div>

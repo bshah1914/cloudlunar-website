@@ -28,7 +28,7 @@ const stats = [
 
 export default function TrustedBy() {
   return (
-    <section className="relative py-20 overflow-hidden bg-[#06070a]">
+    <section className="relative py-20 overflow-hidden bg-[#030712]">
       <div className="relative z-10 max-w-6xl mx-auto px-6">
         {/* Label */}
         <motion.p
@@ -43,8 +43,8 @@ export default function TrustedBy() {
 
         {/* Marquee */}
         <div className="relative overflow-hidden">
-          <div className="absolute left-0 top-0 bottom-0 w-28 bg-gradient-to-r from-[#06070a] to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-28 bg-gradient-to-l from-[#06070a] to-transparent z-10 pointer-events-none" />
+          <div className="absolute left-0 top-0 bottom-0 w-28 bg-gradient-to-r from-[#030712] to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-28 bg-gradient-to-l from-[#030712] to-transparent z-10 pointer-events-none" />
 
           <div className="flex animate-marquee">
             {[...logos, ...logos].map((logo, i) => {

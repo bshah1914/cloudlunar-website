@@ -62,7 +62,7 @@ const testimonials = [
 export default function Testimonials() {
   return (
     <section className="relative py-28 md:py-36 bg-grid">
-      <div className="absolute inset-0 bg-gradient-to-b from-[#030014] via-transparent to-[#030014] pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#030712] via-transparent to-[#030712] pointer-events-none" />
       <div className="absolute top-1/3 left-0 w-[400px] h-[400px] bg-emerald-600/5 rounded-full blur-[150px] animate-aurora-slow" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
@@ -94,13 +94,13 @@ export default function Testimonials() {
               </div>
 
               <div className="relative mb-5 flex-1">
-                <Quote className="w-8 h-8 text-indigo-500/20 absolute -top-1 -left-1" />
+                <Quote className="w-8 h-8 text-blue-500/20 absolute -top-1 -left-1" />
                 <p className="text-sm text-gray-300 leading-relaxed pl-4">{t.quote}</p>
               </div>
 
               <div className="flex items-center justify-between pt-4 border-t border-white/5">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white text-sm font-bold">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-white text-sm font-bold">
                     {t.avatar}
                   </div>
                   <div>
