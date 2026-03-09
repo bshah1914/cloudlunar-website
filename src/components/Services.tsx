@@ -46,7 +46,7 @@ export default function Services() {
 
   return (
     <section id="services" className="relative py-28 md:py-36">
-      <div className="absolute inset-0 bg-gradient-to-b from-[#050510] via-surface-800/20 to-[#050510] pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#06070a] via-transparent to-[#06070a] pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">

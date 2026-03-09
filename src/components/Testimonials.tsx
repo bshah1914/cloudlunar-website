@@ -62,7 +62,8 @@ const testimonials = [
 export default function Testimonials() {
   return (
     <section className="relative py-28 md:py-36 bg-grid">
-      <div className="absolute inset-0 bg-gradient-to-b from-[#050510] via-transparent to-[#050510] pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#030014] via-transparent to-[#030014] pointer-events-none" />
+      <div className="absolute top-1/3 left-0 w-[400px] h-[400px] bg-emerald-600/5 rounded-full blur-[150px] animate-aurora-slow" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-20">

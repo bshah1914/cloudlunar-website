@@ -23,7 +23,7 @@ const faqs = [
   },
   {
     q: "Can I use CloudLunar with multiple AWS accounts?",
-    a: "Yes. CloudLunar supports multi-account setups. Each account has its own IAM role and gets scanned independently. The dashboard aggregates data across all accounts with per-account filtering. Professional plan supports up to 10 accounts, Enterprise is unlimited.",
+    a: "Yes. CloudLunar supports multi-account setups. Each account has its own IAM role and gets scanned independently. The dashboard aggregates data across all accounts with per-account filtering. Starter supports 5 accounts, Professional up to 20, and Enterprise is unlimited.",
   },
   {
     q: "What optimization checks does the engine run?",
@@ -39,7 +39,7 @@ const faqs = [
   },
   {
     q: "How often does CloudLunar scan my resources?",
-    a: "Scan frequency depends on your plan: weekly (Starter), daily (Professional), or continuous real-time (Enterprise). You can also trigger on-demand scans from the dashboard at any time.",
+    a: "Scan frequency depends on your plan: Free gets basic scans, Starter ($99/mo) includes regular scans, Professional ($299/mo) gets daily automated scans, and Enterprise ($999/mo) offers continuous real-time scanning. You can also trigger on-demand scans from the dashboard at any time.",
   },
   {
     q: "Is CloudLunar SOC 2 compliant?",
@@ -78,7 +78,7 @@ export default function FAQ() {
 
   return (
     <section id="faq" className="relative py-28 md:py-36 bg-grid">
-      <div className="absolute inset-0 bg-gradient-to-b from-[#050510] via-transparent to-[#050510] pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#030014] via-transparent to-[#030014] pointer-events-none" />
 
       <div className="relative z-10 max-w-4xl mx-auto px-6">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">

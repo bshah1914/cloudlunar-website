@@ -44,7 +44,8 @@ export default function DashboardPreview() {
 
   return (
     <section id="dashboard" className="relative py-28 md:py-36 bg-grid">
-      <div className="absolute inset-0 bg-gradient-to-b from-[#050510] via-transparent to-[#050510] pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#030014] via-transparent to-[#030014] pointer-events-none" />
+      <div className="absolute top-1/4 left-0 w-[500px] h-[500px] bg-green-600/5 rounded-full blur-[180px] animate-aurora" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">

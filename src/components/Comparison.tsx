@@ -56,7 +56,7 @@ function CellValue({ value }: { value: boolean | string }) {
 export default function Comparison() {
   return (
     <section className="relative py-28 md:py-36">
-      <div className="absolute inset-0 bg-gradient-to-b from-[#050510] via-surface-800/20 to-[#050510] pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#030014] via-surface-800/20 to-[#030014] pointer-events-none" />
 
       <div className="relative z-10 max-w-5xl mx-auto px-6">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
@@ -69,7 +69,7 @@ export default function Comparison() {
           </p>
         </motion.div>
 
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="glass-card overflow-hidden">
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="glass-card overflow-x-auto">
           {/* Header */}
           <div className="grid grid-cols-4 gap-4 px-6 py-4 border-b border-white/10 bg-white/[0.02]">
             <div className="text-sm text-gray-500 font-medium">Feature</div>

@@ -1,6 +1,12 @@
-import React from "react";
 import { motion } from "framer-motion";
-import { Building2, ShieldCheck, Award, Globe2, Briefcase, Landmark } from "lucide-react";
+import {
+  Building2,
+  ShieldCheck,
+  Award,
+  Globe2,
+  Briefcase,
+  Landmark,
+} from "lucide-react";
 
 const logos = [
   { icon: Building2, name: "TechCorp" },
@@ -13,53 +19,70 @@ const logos = [
   { icon: Globe2, name: "NetBridge" },
 ];
 
+const stats = [
+  { value: "500+", label: "Cloud accounts managed" },
+  { value: "99.9%", label: "Platform uptime" },
+  { value: "$12M+", label: "Total savings identified" },
+  { value: "< 5 min", label: "Setup time" },
+];
+
 export default function TrustedBy() {
   return (
-    <section className="relative py-16 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-[#050510] via-surface-800/30 to-[#050510]" />
-
-      <div className="relative z-10 max-w-7xl mx-auto px-6">
+    <section className="relative py-20 overflow-hidden bg-[#06070a]">
+      <div className="relative z-10 max-w-6xl mx-auto px-6">
+        {/* Label */}
         <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center text-xs text-gray-600 uppercase tracking-[0.25em] font-medium mb-10"
+          transition={{ duration: 0.6 }}
+          className="text-center text-xs text-gray-500 uppercase tracking-[0.3em] font-medium mb-12"
         >
           Trusted by engineering teams at leading companies
         </motion.p>
 
         {/* Marquee */}
         <div className="relative overflow-hidden">
-          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#050510] to-transparent z-10" />
-          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#050510] to-transparent z-10" />
+          <div className="absolute left-0 top-0 bottom-0 w-28 bg-gradient-to-r from-[#06070a] to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-28 bg-gradient-to-l from-[#06070a] to-transparent z-10 pointer-events-none" />
 
           <div className="flex animate-marquee">
-            {[...logos, ...logos].map((logo, i) => (
-              <div key={i} className="flex items-center gap-3 mx-10 flex-shrink-0 opacity-30 hover:opacity-60 transition-opacity">
-                <logo.icon className="w-6 h-6 text-gray-400" />
-                <span className="text-lg font-semibold text-gray-400 whitespace-nowrap">{logo.name}</span>
-              </div>
-            ))}
+            {[...logos, ...logos].map((logo, i) => {
+              const Icon = logo.icon;
+              return (
+                <div
+                  key={i}
+                  className="flex items-center gap-2.5 mx-8 flex-shrink-0 opacity-25 hover:opacity-50 transition-opacity duration-300"
+                >
+                  <Icon className="w-5 h-5 text-gray-400" strokeWidth={1.5} />
+                  <span className="text-base font-medium text-gray-400 whitespace-nowrap tracking-wide">
+                    {logo.name}
+                  </span>
+                </div>
+              );
+            })}
           </div>
         </div>
 
+        {/* Divider */}
+        <div className="mx-auto mt-14 mb-10 h-px w-full max-w-2xl bg-gradient-to-r from-transparent via-gray-800 to-transparent" />
+
         {/* Mini Stats */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
-          className="flex flex-wrap justify-center gap-8 md:gap-16 mt-14"
+          transition={{ duration: 0.6, delay: 0.15 }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-4 max-w-3xl mx-auto"
         >
-          {[
-            { value: "500+", label: "Cloud accounts managed" },
-            { value: "99.9%", label: "Platform uptime" },
-            { value: "$12M+", label: "Total savings identified" },
-            { value: "< 5 min", label: "Setup time" },
-          ].map((item) => (
-            <div key={item.label} className="text-center">
-              <p className="text-2xl font-bold text-white">{item.value}</p>
-              <p className="text-xs text-gray-500 mt-1">{item.label}</p>
+          {stats.map((item) => (
+            <div key={item.label} className="text-center px-2">
+              <p className="text-xl font-semibold text-white tracking-tight">
+                {item.value}
+              </p>
+              <p className="text-[11px] text-gray-600 mt-1 leading-snug">
+                {item.label}
+              </p>
             </div>
           ))}
         </motion.div>

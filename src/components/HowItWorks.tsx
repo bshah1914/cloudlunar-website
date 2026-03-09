@@ -1,4 +1,3 @@
-import React from "react";
 import { motion } from "framer-motion";
 import {
   Link2,
@@ -21,6 +20,7 @@ const steps = [
       "No access keys stored",
     ],
     color: "from-blue-500 to-cyan-500",
+    glowColor: "blue-500",
   },
   {
     icon: ScanSearch,
@@ -33,7 +33,8 @@ const steps = [
       "Tags, configuration, and status",
       "Region-aware scanning",
     ],
-    color: "from-lunar-500 to-purple-500",
+    color: "from-violet-500 to-purple-500",
+    glowColor: "violet-500",
   },
   {
     icon: LineChart,
@@ -47,6 +48,7 @@ const steps = [
       "90-day Cost Explorer trends",
     ],
     color: "from-purple-500 to-pink-500",
+    glowColor: "purple-500",
   },
   {
     icon: Lightbulb,
@@ -60,6 +62,7 @@ const steps = [
       "Commitment opportunities (RI/SP)",
     ],
     color: "from-amber-500 to-orange-500",
+    glowColor: "amber-500",
   },
   {
     icon: CheckCircle,
@@ -73,15 +76,37 @@ const steps = [
       "Savings realization reports",
     ],
     color: "from-green-500 to-emerald-500",
+    glowColor: "green-500",
   },
 ];
 
+const cardVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      delay: i * 0.15,
+      ease: "easeOut" as const,
+    },
+  }),
+};
+
 export default function HowItWorks() {
   return (
-    <section id="how-it-works" className="relative py-32">
-      <div className="absolute inset-0 bg-gradient-to-b from-dark-900 via-dark-800 to-dark-900 pointer-events-none" />
+    <section
+      id="how-it-works"
+      className="relative py-32 overflow-hidden"
+      style={{ backgroundColor: "#06070a" }}
+    >
+      {/* Background ambient glow */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-purple-600/5 rounded-full blur-[180px] pointer-events-none" />
+      <div className="absolute bottom-1/4 left-1/4 w-[300px] h-[300px] bg-blue-600/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-1/3 right-1/4 w-[300px] h-[300px] bg-green-600/5 rounded-full blur-[120px] pointer-events-none" />
 
-      <div className="relative z-10 max-w-5xl mx-auto px-6">
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
+        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -89,10 +114,10 @@ export default function HowItWorks() {
           transition={{ duration: 0.6 }}
           className="text-center mb-20"
         >
-          <span className="text-amber-400 text-sm font-semibold tracking-widest uppercase">
+          <span className="inline-block px-4 py-1.5 rounded-full border border-amber-400/30 bg-amber-400/5 text-amber-400 text-sm font-semibold tracking-widest uppercase mb-5">
             Process
           </span>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mt-3 mb-5">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mt-1 mb-5">
             How It Works
           </h2>
           <p className="text-gray-400 max-w-xl mx-auto text-lg">
@@ -101,64 +126,99 @@ export default function HowItWorks() {
           </p>
         </motion.div>
 
+        {/* Steps Container */}
         <div className="relative">
-          {/* Vertical Line */}
-          <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-lunar-500/50 via-purple-500/50 to-green-500/50 hidden sm:block" />
+          {/* Desktop: Horizontal connecting gradient line */}
+          <div className="hidden lg:block absolute top-[52px] left-[10%] right-[10%] h-[2px]">
+            <div className="w-full h-full bg-gradient-to-r from-blue-500 via-purple-500 via-pink-500 via-amber-500 to-green-500 opacity-40 rounded-full" />
+            <div
+              className="absolute inset-0 rounded-full opacity-30"
+              style={{
+                backgroundImage:
+                  "repeating-linear-gradient(to right, transparent, transparent 8px, #06070a 8px, #06070a 16px)",
+              }}
+            />
+          </div>
 
-          <div className="space-y-16">
+          {/* Mobile: Vertical connecting gradient line */}
+          <div className="lg:hidden absolute left-[28px] top-[52px] bottom-[52px] w-[2px]">
+            <div className="w-full h-full bg-gradient-to-b from-blue-500 via-purple-500 via-pink-500 via-amber-500 to-green-500 opacity-40 rounded-full" />
+            <div
+              className="absolute inset-0 rounded-full opacity-30"
+              style={{
+                backgroundImage:
+                  "repeating-linear-gradient(to bottom, transparent, transparent 8px, #06070a 8px, #06070a 16px)",
+              }}
+            />
+          </div>
+
+          {/* Cards Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-4">
             {steps.map((step, i) => {
-              const isLeft = i % 2 === 0;
+              const Icon = step.icon;
               return (
                 <motion.div
                   key={step.step}
-                  initial={{ opacity: 0, x: isLeft ? -40 : 40 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.1 }}
-                  className={`relative flex flex-col md:flex-row items-start gap-6 ${
-                    isLeft ? "md:flex-row" : "md:flex-row-reverse"
-                  }`}
+                  custom={i}
+                  variants={cardVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, margin: "-50px" }}
+                  className="relative flex flex-row lg:flex-col items-start lg:items-center gap-5 lg:gap-0 group"
                 >
                   {/* Step Number Circle */}
-                  <div className="hidden sm:flex absolute left-8 md:left-1/2 transform -translate-x-1/2 z-10">
+                  <div className="relative z-10 flex-shrink-0">
                     <div
-                      className={`w-10 h-10 rounded-full bg-gradient-to-br ${step.color} flex items-center justify-center text-white font-bold text-xs shadow-lg`}
+                      className={`w-14 h-14 rounded-full bg-gradient-to-br ${step.color} p-[2px] shadow-lg`}
                     >
-                      {step.step}
+                      <div className="w-full h-full rounded-full bg-[#0c0d12] flex items-center justify-center">
+                        <span className="text-white font-bold text-sm">
+                          {step.step}
+                        </span>
+                      </div>
                     </div>
                   </div>
 
-                  {/* Content Card */}
-                  <div
-                    className={`glass-card p-6 md:w-[calc(50%-40px)] ${
-                      isLeft ? "md:mr-auto" : "md:ml-auto"
-                    } ml-16 sm:ml-0 hover:bg-white/10 transition-all`}
+                  {/* Card */}
+                  <motion.div
+                    whileHover={{ y: -6 }}
+                    transition={{ duration: 0.25, ease: "easeOut" }}
+                    className="flex-1 lg:mt-6 lg:w-full rounded-2xl border border-white/[0.06] bg-white/[0.03] backdrop-blur-md p-5 transition-colors duration-300 hover:border-white/[0.12] hover:bg-white/[0.06]"
                   >
-                    <div className="flex items-center gap-3 mb-3">
-                      <div
-                        className={`w-10 h-10 rounded-xl bg-gradient-to-br ${step.color} flex items-center justify-center sm:hidden`}
-                      >
-                        <step.icon className="w-5 h-5 text-white" />
-                      </div>
-                      <h3 className="text-lg font-semibold text-white">
-                        {step.title}
-                      </h3>
-                    </div>
+                    {/* Icon */}
+                    <motion.div
+                      whileHover={{ scale: 1.15 }}
+                      transition={{ duration: 0.25 }}
+                      className={`w-10 h-10 rounded-xl bg-gradient-to-br ${step.color} flex items-center justify-center mb-4 shadow-md`}
+                    >
+                      <Icon className="w-5 h-5 text-white" />
+                    </motion.div>
+
+                    {/* Title */}
+                    <h3 className="text-base font-semibold text-white mb-2 leading-snug">
+                      {step.title}
+                    </h3>
+
+                    {/* Description */}
                     <p className="text-sm text-gray-400 mb-4 leading-relaxed">
                       {step.description}
                     </p>
-                    <ul className="space-y-1.5">
+
+                    {/* Detail Bullets */}
+                    <ul className="space-y-2">
                       {step.details.map((d) => (
                         <li
                           key={d}
-                          className="text-xs text-gray-500 flex items-center gap-2"
+                          className="text-xs text-gray-500 flex items-start gap-2"
                         >
-                          <span className="w-1 h-1 bg-lunar-500 rounded-full" />
+                          <span
+                            className={`mt-1.5 w-1 h-1 flex-shrink-0 rounded-full bg-gradient-to-br ${step.color}`}
+                          />
                           {d}
                         </li>
                       ))}
                     </ul>
-                  </div>
+                  </motion.div>
                 </motion.div>
               );
             })}
