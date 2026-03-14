@@ -62,17 +62,17 @@ const testimonials = [
 export default function Testimonials() {
   return (
     <section className="relative py-28 md:py-36 bg-grid">
-      <div className="absolute inset-0 bg-gradient-to-b from-[#030712] via-transparent to-[#030712] pointer-events-none" />
-      <div className="absolute top-1/3 left-0 w-[400px] h-[400px] bg-emerald-600/5 rounded-full blur-[150px] animate-aurora-slow" />
+      <div className="absolute inset-0 bg-gradient-to-b from-white dark:from-[#030712] via-transparent to-white dark:to-[#030712] pointer-events-none" />
+      <div className="absolute top-1/3 left-0 w-[400px] h-[400px] bg-emerald-100/30 rounded-full blur-[150px] animate-aurora-slow" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-20">
-          <span className="text-green-400 text-sm font-semibold tracking-widest uppercase">Testimonials</span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mt-3 mb-6">
+          <span className="text-green-600 text-sm font-semibold tracking-widest uppercase">Testimonials</span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mt-3 mb-6">
             Loved by Engineering<br />
             <span className="text-gradient-green">Teams Worldwide</span>
           </h2>
-          <p className="text-gray-400 max-w-xl mx-auto text-lg">
+          <p className="text-gray-500 dark:text-gray-400 max-w-xl mx-auto text-lg">
             See how engineering teams are saving thousands per month with CloudLunar's real-data approach.
           </p>
         </motion.div>
@@ -94,21 +94,21 @@ export default function Testimonials() {
               </div>
 
               <div className="relative mb-5 flex-1">
-                <Quote className="w-8 h-8 text-blue-500/20 absolute -top-1 -left-1" />
-                <p className="text-sm text-gray-300 leading-relaxed pl-4">{t.quote}</p>
+                <Quote className="w-8 h-8 text-blue-200 absolute -top-1 -left-1" />
+                <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed pl-4">{t.quote}</p>
               </div>
 
-              <div className="flex items-center justify-between pt-4 border-t border-white/5">
+              <div className="flex items-center justify-between pt-4 border-t border-gray-100 dark:border-white/5">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-white text-sm font-bold">
                     {t.avatar}
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-white">{t.name}</p>
-                    <p className="text-[11px] text-gray-500">{t.role}, {t.company}</p>
+                    <p className="text-sm font-medium text-gray-900 dark:text-white">{t.name}</p>
+                    <p className="text-[11px] text-gray-400 dark:text-gray-500">{t.role}, {t.company}</p>
                   </div>
                 </div>
-                <span className="text-[10px] px-2.5 py-1 rounded-full bg-green-500/10 text-green-400 border border-green-500/20 font-medium">
+                <span className="text-[10px] px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200 font-medium">
                   {t.savings}
                 </span>
               </div>

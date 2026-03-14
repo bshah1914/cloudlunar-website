@@ -7,7 +7,7 @@ const TOOL_URL = "http://localhost:3000";
 const faqs = [
   {
     q: "How does CloudLunar connect to my AWS account?",
-    a: "CloudLunar uses AWS STS AssumeRole for secure cross-account access. You create a read-only IAM role in your AWS account and provide the Role ARN. No access keys or secrets are stored \u2014 credentials are temporary and scoped to read-only permissions. Setup takes under 5 minutes.",
+    a: "CloudLunar uses AWS STS AssumeRole for secure cross-account access. You create a read-only IAM role in your AWS account and provide the Role ARN. No access keys or secrets are stored — credentials are temporary and scoped to read-only permissions. Setup takes under 5 minutes.",
   },
   {
     q: "What AWS services does CloudLunar scan?",
@@ -27,11 +27,11 @@ const faqs = [
   },
   {
     q: "What optimization checks does the engine run?",
-    a: "25+ checks including: idle resource detection (P95 CPU < 5%), EC2/RDS rightsizing, S3 lifecycle rules, S3 Intelligent-Tiering, EBS gp2\u2192gp3 migration, unattached EBS/EIP cleanup, idle load balancers, Lambda memory rightsizing, unused Lambda deletion, DynamoDB on-demand switching, ElastiCache idle clusters, Redshift RA3 migration, CloudFront price class optimization, ECS Fargate rightsizing, OpenSearch Graviton migration, SQS DLQ monitoring, and CloudWatch Logs retention policies.",
+    a: "25+ checks including: idle resource detection (P95 CPU < 5%), EC2/RDS rightsizing, S3 lifecycle rules, S3 Intelligent-Tiering, EBS gp2→gp3 migration, unattached EBS/EIP cleanup, idle load balancers, Lambda memory rightsizing, unused Lambda deletion, DynamoDB on-demand switching, ElastiCache idle clusters, Redshift RA3 migration, CloudFront price class optimization, ECS Fargate rightsizing, OpenSearch Graviton migration, SQS DLQ monitoring, and CloudWatch Logs retention policies.",
   },
   {
     q: "Does CloudLunar modify or change anything in my AWS account?",
-    a: "No. CloudLunar only uses read-only API calls. It never creates, modifies, or deletes any resources. Recommendations are surfaced in the dashboard \u2014 implementation is always done by your team with full control.",
+    a: "No. CloudLunar only uses read-only API calls. It never creates, modifies, or deletes any resources. Recommendations are surfaced in the dashboard — implementation is always done by your team with full control.",
   },
   {
     q: "What's the tech stack?",
@@ -47,7 +47,7 @@ const faqs = [
   },
   {
     q: "Does the monitoring agent work on Windows and macOS?",
-    a: "Yes. The CloudLunar agent runs on Linux (systemd), macOS (launchd), and Windows (Scheduled Task or NSSM service). It uses psutil for cross-platform system metrics \u2014 CPU, memory, disk, network, and processes \u2014 with zero CloudWatch costs. Each platform has a dedicated one-command installer.",
+    a: "Yes. The CloudLunar agent runs on Linux (systemd), macOS (launchd), and Windows (Scheduled Task or NSSM service). It uses psutil for cross-platform system metrics — CPU, memory, disk, network, and processes — with zero CloudWatch costs. Each platform has a dedicated one-command installer.",
   },
   {
     q: "What is cost anomaly detection?",
@@ -55,18 +55,18 @@ const faqs = [
   },
   {
     q: "Can I allocate costs by team or project?",
-    a: "Yes. Tag-based cost allocation lets you group AWS costs by any tag key \u2014 Environment, Team, Project, or custom tags. See exactly which team or project is driving spend, track untagged resources, and export breakdowns for chargeback or showback reporting.",
+    a: "Yes. Tag-based cost allocation lets you group AWS costs by any tag key — Environment, Team, Project, or custom tags. See exactly which team or project is driving spend, track untagged resources, and export breakdowns for chargeback or showback reporting.",
   },
 ];
 
 function FAQItem({ q, a, isOpen, toggle }: { q: string; a: string; isOpen: boolean; toggle: () => void }) {
   return (
-    <div className="border-b border-white/5">
+    <div className="border-b border-gray-100 dark:border-white/5">
       <button onClick={toggle} className="w-full flex items-center justify-between py-5 text-left group">
-        <span className={`text-sm font-medium transition-colors ${isOpen ? "text-white" : "text-gray-300 group-hover:text-white"}`}>
+        <span className={`text-sm font-medium transition-colors ${isOpen ? "text-gray-900 dark:text-white" : "text-gray-600 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white"}`}>
           {q}
         </span>
-        <ChevronDown className={`w-5 h-5 text-gray-500 flex-shrink-0 ml-4 transition-transform duration-300 ${isOpen ? "rotate-180 text-cyan-400" : ""}`} />
+        <ChevronDown className={`w-5 h-5 text-gray-400 dark:text-gray-500 flex-shrink-0 ml-4 transition-transform duration-300 ${isOpen ? "rotate-180 text-blue-500" : ""}`} />
       </button>
       <AnimatePresence>
         {isOpen && (
@@ -77,7 +77,7 @@ function FAQItem({ q, a, isOpen, toggle }: { q: string; a: string; isOpen: boole
             transition={{ duration: 0.3 }}
             className="overflow-hidden"
           >
-            <p className="text-sm text-gray-400 leading-relaxed pb-5 pr-8">{a}</p>
+            <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed pb-5 pr-8">{a}</p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -90,15 +90,15 @@ export default function FAQ() {
 
   return (
     <section id="faq" className="relative py-28 md:py-36 bg-grid">
-      <div className="absolute inset-0 bg-gradient-to-b from-[#030712] via-transparent to-[#030712] pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-white dark:from-[#030712] via-transparent to-white dark:to-[#030712] pointer-events-none" />
 
       <div className="relative z-10 max-w-4xl mx-auto px-6">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-          <span className="text-cyan-400 text-sm font-semibold tracking-widest uppercase">FAQ</span>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mt-3 mb-6">
+          <span className="text-blue-600 text-sm font-semibold tracking-widest uppercase">FAQ</span>
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mt-3 mb-6">
             Frequently Asked Questions
           </h2>
-          <p className="text-gray-400 max-w-xl mx-auto text-lg">
+          <p className="text-gray-500 dark:text-gray-400 max-w-xl mx-auto text-lg">
             Everything you need to know about CloudLunar. Can't find your answer? Contact our team.
           </p>
         </motion.div>
@@ -110,8 +110,8 @@ export default function FAQ() {
         </motion.div>
 
         <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-center mt-12">
-          <p className="text-sm text-gray-500 mb-4">Still have questions?</p>
-          <a href={TOOL_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-6 py-3 glass hover:bg-white/10 text-white text-sm font-medium rounded-xl transition-all">
+          <p className="text-sm text-gray-400 dark:text-gray-500 mb-4">Still have questions?</p>
+          <a href={TOOL_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-6 py-3 bg-white dark:bg-[#030712] border border-gray-200 dark:border-white/10 hover:border-gray-300 dark:hover:border-white/20 hover:bg-gray-50 dark:hover:bg-white/5 text-gray-700 dark:text-gray-200 text-sm font-medium rounded-xl transition-all shadow-sm hover:shadow-md">
             Contact Support <ExternalLink className="w-3.5 h-3.5" />
           </a>
         </motion.div>

@@ -51,7 +51,7 @@ const stack = [
 export default function TechStack() {
   return (
     <section className="relative py-32">
-      <div className="absolute inset-0 bg-gradient-to-b from-dark-900 via-dark-800 to-dark-900 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-50 via-white to-slate-50 dark:from-[#030712] dark:via-[#030712] dark:to-[#030712] pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         <motion.div
@@ -61,13 +61,13 @@ export default function TechStack() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="text-emerald-400 text-sm font-semibold tracking-widest uppercase">
+          <span className="text-emerald-600 text-sm font-semibold tracking-widest uppercase">
             Technology
           </span>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mt-3 mb-5">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mt-3 mb-5">
             Built With Modern Stack
           </h2>
-          <p className="text-gray-400 max-w-xl mx-auto text-lg">
+          <p className="text-gray-500 dark:text-gray-400 max-w-xl mx-auto text-lg">
             Production-ready technology choices for reliability, performance, and
             developer experience.
           </p>
@@ -85,13 +85,13 @@ export default function TechStack() {
             >
               <div className="flex items-center gap-2 mb-5">
                 <span className={`w-2 h-2 rounded-full ${cat.dot}`} />
-                <h3 className="font-semibold text-white">{cat.category}</h3>
+                <h3 className="font-semibold text-gray-900 dark:text-white">{cat.category}</h3>
               </div>
               <ul className="space-y-4">
                 {cat.items.map((item) => (
                   <li key={item.name}>
-                    <p className="text-sm font-medium text-white">{item.name}</p>
-                    <p className="text-xs text-gray-500">{item.desc}</p>
+                    <p className="text-sm font-medium text-gray-900 dark:text-white">{item.name}</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">{item.desc}</p>
                   </li>
                 ))}
               </ul>

@@ -74,7 +74,7 @@ export default function Contact() {
 
   return (
     <section className="relative py-28 md:py-36">
-      <div className="absolute inset-0 bg-gradient-to-b from-[#030712] via-[#040a18] to-[#030712] pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-white via-blue-50/30 to-white dark:from-[#030712] dark:via-blue-950/30 dark:to-[#030712] pointer-events-none" />
       <div className="absolute top-[10%] right-[15%] w-[500px] h-[500px] bg-blue-600/[0.04] rounded-full blur-[200px]" />
       <div className="absolute bottom-[20%] left-[10%] w-[400px] h-[400px] bg-cyan-600/[0.03] rounded-full blur-[160px]" />
 
@@ -93,12 +93,12 @@ export default function Contact() {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-6"
           >
             <Sparkles className="w-4 h-4 text-cyan-400" />
-            <span className="text-sm text-gray-300 font-medium">Get in Touch</span>
+            <span className="text-sm text-gray-400 dark:text-gray-500 font-medium">Get in Touch</span>
           </motion.div>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
             Let's <span className="text-gradient">Optimize Together</span>
           </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto text-lg leading-relaxed">
+          <p className="text-gray-500 dark:text-gray-400 max-w-2xl mx-auto text-lg leading-relaxed">
             Whether you need a custom demo, enterprise pricing, or technical support — our team is ready to help you start saving.
           </p>
         </motion.div>
@@ -120,13 +120,13 @@ export default function Contact() {
                 <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${method.color} flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-500`}>
                   <method.icon className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-lg font-semibold text-white mb-2">{method.title}</h3>
-                <p className="text-sm text-gray-400 leading-relaxed mb-4">{method.description}</p>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">{method.title}</h3>
+                <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed mb-4">{method.description}</p>
                 <div className="flex items-center gap-2 text-sm text-blue-400 font-medium mb-2">
                   <Mail className="w-4 h-4" />
                   {method.email}
                 </div>
-                <div className="flex items-center gap-2 text-xs text-gray-500">
+                <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
                   <Clock className="w-3.5 h-3.5" />
                   Response time: {method.response}
                 </div>
@@ -144,8 +144,8 @@ export default function Contact() {
             viewport={{ once: true }}
             className="lg:col-span-3 glass-card p-8 md:p-10"
           >
-            <h3 className="text-2xl font-bold text-white mb-2">Send us a message</h3>
-            <p className="text-sm text-gray-400 mb-8">Fill out the form and our team will get back to you within 24 hours.</p>
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Send us a message</h3>
+            <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">Fill out the form and our team will get back to you within 24 hours.</p>
 
             {submitted ? (
               <motion.div
@@ -156,8 +156,8 @@ export default function Contact() {
                 <div className="w-16 h-16 rounded-full bg-emerald-500/10 flex items-center justify-center mb-6">
                   <CheckCircle2 className="w-8 h-8 text-emerald-400" />
                 </div>
-                <h4 className="text-xl font-semibold text-white mb-2">Message Sent!</h4>
-                <p className="text-sm text-gray-400 mb-6">Thank you for reaching out. We'll get back to you shortly.</p>
+                <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Message Sent!</h4>
+                <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">Thank you for reaching out. We'll get back to you shortly.</p>
                 <button
                   onClick={() => setSubmitted(false)}
                   className="text-sm text-blue-400 hover:text-blue-300 transition-colors flex items-center gap-1"
@@ -169,68 +169,68 @@ export default function Contact() {
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="grid sm:grid-cols-2 gap-5">
                   <div>
-                    <label className="block text-xs text-gray-400 font-medium mb-2">Full Name *</label>
+                    <label className="block text-xs text-gray-500 dark:text-gray-400 font-medium mb-2">Full Name *</label>
                     <input
                       type="text"
                       required
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       placeholder="John Doe"
-                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-sm text-white placeholder-gray-600 focus:outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/20 transition-all"
+                      className="w-full px-4 py-3 bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl text-sm text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/20 transition-all"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs text-gray-400 font-medium mb-2">Work Email *</label>
+                    <label className="block text-xs text-gray-500 dark:text-gray-400 font-medium mb-2">Work Email *</label>
                     <input
                       type="email"
                       required
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       placeholder="john@company.com"
-                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-sm text-white placeholder-gray-600 focus:outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/20 transition-all"
+                      className="w-full px-4 py-3 bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl text-sm text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/20 transition-all"
                     />
                   </div>
                 </div>
                 <div className="grid sm:grid-cols-2 gap-5">
                   <div>
-                    <label className="block text-xs text-gray-400 font-medium mb-2">Company</label>
+                    <label className="block text-xs text-gray-500 dark:text-gray-400 font-medium mb-2">Company</label>
                     <input
                       type="text"
                       value={formData.company}
                       onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                       placeholder="Acme Corp"
-                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-sm text-white placeholder-gray-600 focus:outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/20 transition-all"
+                      className="w-full px-4 py-3 bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl text-sm text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/20 transition-all"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs text-gray-400 font-medium mb-2">Subject</label>
+                    <label className="block text-xs text-gray-500 dark:text-gray-400 font-medium mb-2">Subject</label>
                     <select
                       value={formData.subject}
                       onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-sm text-white focus:outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/20 transition-all appearance-none cursor-pointer"
+                      className="w-full px-4 py-3 bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl text-sm text-gray-900 dark:text-white focus:outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/20 transition-all appearance-none cursor-pointer"
                     >
-                      <option value="general" className="bg-[#0a1628]">General Inquiry</option>
-                      <option value="demo" className="bg-[#0a1628]">Request a Demo</option>
-                      <option value="enterprise" className="bg-[#0a1628]">Enterprise Pricing</option>
-                      <option value="support" className="bg-[#0a1628]">Technical Support</option>
-                      <option value="partnership" className="bg-[#0a1628]">Partnership</option>
+                      <option value="general" className="bg-blue-50">General Inquiry</option>
+                      <option value="demo" className="bg-blue-50">Request a Demo</option>
+                      <option value="enterprise" className="bg-blue-50">Enterprise Pricing</option>
+                      <option value="support" className="bg-blue-50">Technical Support</option>
+                      <option value="partnership" className="bg-blue-50">Partnership</option>
                     </select>
                   </div>
                 </div>
                 <div>
-                  <label className="block text-xs text-gray-400 font-medium mb-2">Message *</label>
+                  <label className="block text-xs text-gray-500 font-medium mb-2">Message *</label>
                   <textarea
                     required
                     rows={5}
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     placeholder="Tell us about your cloud infrastructure and how we can help..."
-                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-sm text-white placeholder-gray-600 focus:outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/20 transition-all resize-none"
+                    className="w-full px-4 py-3 bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl text-sm text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/20 transition-all resize-none"
                   />
                 </div>
                 <button
                   type="submit"
-                  className="group w-full sm:w-auto px-8 py-3.5 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-semibold rounded-xl transition-all hover:shadow-lg hover:shadow-blue-500/20 flex items-center justify-center gap-2"
+                  className="group w-full sm:w-auto px-8 py-3.5 bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-semibold rounded-xl transition-all hover:shadow-lg hover:shadow-blue-500/20 flex items-center justify-center gap-2"
                 >
                   <Send className="w-4 h-4" />
                   Send Message
@@ -249,7 +249,7 @@ export default function Contact() {
           >
             {/* Quick Stats */}
             <div className="glass-card p-6">
-              <h4 className="text-sm font-semibold text-white mb-5 flex items-center gap-2">
+              <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-5 flex items-center gap-2">
                 <Users className="w-4 h-4 text-cyan-400" /> Why Teams Choose Us
               </h4>
               <div className="space-y-4">
@@ -259,10 +259,10 @@ export default function Contact() {
                   { label: "Customer satisfaction", value: "98%", desc: "renewal rate" },
                   { label: "Support response", value: "< 1 hr", desc: "avg. reply" },
                 ].map((stat) => (
-                  <div key={stat.label} className="flex items-center justify-between py-2 border-b border-white/5 last:border-0">
+                  <div key={stat.label} className="flex items-center justify-between py-2 border-b border-gray-100 dark:border-white/5 last:border-0">
                     <div>
-                      <p className="text-sm text-gray-300">{stat.label}</p>
-                      <p className="text-[10px] text-gray-600">{stat.desc}</p>
+                      <p className="text-sm text-gray-400 dark:text-gray-500">{stat.label}</p>
+                      <p className="text-[10px] text-gray-400 dark:text-gray-500">{stat.desc}</p>
                     </div>
                     <span className="text-lg font-bold text-gradient">{stat.value}</span>
                   </div>
@@ -277,8 +277,8 @@ export default function Contact() {
                   <Shield className="w-5 h-5 text-emerald-400" />
                 </div>
                 <div>
-                  <h4 className="text-sm font-semibold text-white mb-1">SOC 2 Compliant</h4>
-                  <p className="text-xs text-gray-400 leading-relaxed">
+                  <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-1">SOC 2 Compliant</h4>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
                     Your data is protected with enterprise-grade security. Read-only AWS access, encrypted at rest, and compliant with industry standards.
                   </p>
                 </div>
@@ -287,7 +287,7 @@ export default function Contact() {
 
             {/* Quick Links */}
             <div className="glass-card p-6">
-              <h4 className="text-sm font-semibold text-white mb-4">Quick Resources</h4>
+              <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-4">Quick Resources</h4>
               <div className="space-y-2">
                 {[
                   { label: "Documentation", to: "/docs", icon: BookOpen },
@@ -299,9 +299,9 @@ export default function Contact() {
                     to={link.to}
                     className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/5 transition-colors group"
                   >
-                    <link.icon className="w-4 h-4 text-gray-500 group-hover:text-blue-400 transition-colors" />
-                    <span className="text-sm text-gray-400 group-hover:text-white transition-colors">{link.label}</span>
-                    <ArrowRight className="w-3.5 h-3.5 text-gray-600 ml-auto group-hover:text-blue-400 group-hover:translate-x-0.5 transition-all" />
+                    <link.icon className="w-4 h-4 text-gray-500 dark:text-gray-400 group-hover:text-blue-400 transition-colors" />
+                    <span className="text-sm text-gray-500 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white transition-colors">{link.label}</span>
+                    <ArrowRight className="w-3.5 h-3.5 text-gray-400 dark:text-gray-500 ml-auto group-hover:text-blue-400 group-hover:translate-x-0.5 transition-all" />
                   </Link>
                 ))}
               </div>
@@ -316,7 +316,7 @@ export default function Contact() {
           viewport={{ once: true }}
           className="mb-20"
         >
-          <h3 className="text-2xl font-bold text-white mb-8 text-center">Our Offices</h3>
+          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-8 text-center">Our Offices</h3>
           <div className="grid md:grid-cols-3 gap-6">
             {offices.map((office, i) => (
               <motion.div
@@ -325,17 +325,17 @@ export default function Contact() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="glass-card p-6 group hover:bg-white/[0.04] transition-all"
+                className="glass-card p-6 group hover:bg-gray-50 dark:hover:bg-white/5 transition-all"
               >
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center flex-shrink-0">
                     <MapPin className="w-5 h-5 text-blue-400" />
                   </div>
                   <div>
-                    <h4 className="text-base font-semibold text-white">{office.city}</h4>
-                    <p className="text-sm text-gray-400">{office.country}</p>
-                    <p className="text-xs text-gray-500 mt-2">{office.address}</p>
-                    <div className="flex items-center gap-1.5 mt-2 text-xs text-gray-600">
+                    <h4 className="text-base font-semibold text-gray-900 dark:text-white">{office.city}</h4>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">{office.country}</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">{office.address}</p>
+                    <div className="flex items-center gap-1.5 mt-2 text-xs text-gray-400 dark:text-gray-500">
                       <Clock className="w-3 h-3" />
                       {office.timezone}
                     </div>
@@ -352,7 +352,7 @@ export default function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <h3 className="text-2xl font-bold text-white mb-8 text-center">Common Questions</h3>
+          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-8 text-center">Common Questions</h3>
           <div className="max-w-3xl mx-auto space-y-3">
             {faqs.map((faq, i) => (
               <motion.div
@@ -367,8 +367,8 @@ export default function Contact() {
                   onClick={() => setActiveFaq(activeFaq === i ? null : i)}
                   className="w-full flex items-center justify-between p-5 text-left"
                 >
-                  <span className="text-sm font-medium text-white">{faq.q}</span>
-                  <ArrowRight className={`w-4 h-4 text-gray-500 transition-transform duration-300 flex-shrink-0 ml-4 ${activeFaq === i ? "rotate-90" : ""}`} />
+                  <span className="text-sm font-medium text-gray-900 dark:text-white">{faq.q}</span>
+                  <ArrowRight className={`w-4 h-4 text-gray-500 dark:text-gray-400 transition-transform duration-300 flex-shrink-0 ml-4 ${activeFaq === i ? "rotate-90" : ""}`} />
                 </button>
                 {activeFaq === i && (
                   <motion.div
@@ -376,7 +376,7 @@ export default function Contact() {
                     animate={{ opacity: 1, height: "auto" }}
                     className="px-5 pb-5"
                   >
-                    <p className="text-sm text-gray-400 leading-relaxed">{faq.a}</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">{faq.a}</p>
                   </motion.div>
                 )}
               </motion.div>

@@ -97,13 +97,12 @@ export default function HowItWorks() {
   return (
     <section
       id="how-it-works"
-      className="relative py-32 overflow-hidden"
-      style={{ backgroundColor: "#030712" }}
+      className="relative py-32 overflow-hidden bg-[#f8fafc] dark:bg-[#030712]"
     >
       {/* Background ambient glow */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-blue-600/5 rounded-full blur-[180px] pointer-events-none" />
-      <div className="absolute bottom-1/4 left-1/4 w-[300px] h-[300px] bg-blue-600/5 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-1/3 right-1/4 w-[300px] h-[300px] bg-green-600/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-blue-100/30 dark:bg-blue-500/10 rounded-full blur-[180px] pointer-events-none" />
+      <div className="absolute bottom-1/4 left-1/4 w-[300px] h-[300px] bg-blue-100/30 dark:bg-blue-500/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-1/3 right-1/4 w-[300px] h-[300px] bg-green-600/5 dark:bg-green-500/5 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         {/* Section Header */}
@@ -114,13 +113,13 @@ export default function HowItWorks() {
           transition={{ duration: 0.6 }}
           className="text-center mb-20"
         >
-          <span className="inline-block px-4 py-1.5 rounded-full border border-amber-400/30 bg-amber-400/5 text-amber-400 text-sm font-semibold tracking-widest uppercase mb-5">
+          <span className="inline-block px-4 py-1.5 rounded-full border border-amber-400/30 bg-amber-400/5 text-amber-600 text-sm font-semibold tracking-widest uppercase mb-5">
             Process
           </span>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mt-1 mb-5">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mt-1 mb-5">
             How It Works
           </h2>
-          <p className="text-gray-400 max-w-xl mx-auto text-lg">
+          <p className="text-gray-500 dark:text-gray-400 max-w-xl mx-auto text-lg">
             From connect to savings in 5 simple steps. Fully automated — no
             manual tagging or configuration required.
           </p>
@@ -135,7 +134,7 @@ export default function HowItWorks() {
               className="absolute inset-0 rounded-full opacity-30"
               style={{
                 backgroundImage:
-                  "repeating-linear-gradient(to right, transparent, transparent 8px, #030712 8px, #030712 16px)",
+                  "repeating-linear-gradient(to right, transparent, transparent 8px, #f8fafc 8px, #f8fafc 16px)",
               }}
             />
           </div>
@@ -147,7 +146,7 @@ export default function HowItWorks() {
               className="absolute inset-0 rounded-full opacity-30"
               style={{
                 backgroundImage:
-                  "repeating-linear-gradient(to bottom, transparent, transparent 8px, #030712 8px, #030712 16px)",
+                  "repeating-linear-gradient(to bottom, transparent, transparent 8px, #f8fafc 8px, #f8fafc 16px)",
               }}
             />
           </div>
@@ -171,8 +170,8 @@ export default function HowItWorks() {
                     <div
                       className={`w-14 h-14 rounded-full bg-gradient-to-br ${step.color} p-[2px] shadow-lg`}
                     >
-                      <div className="w-full h-full rounded-full bg-[#060d1f] flex items-center justify-center">
-                        <span className="text-white font-bold text-sm">
+                      <div className="w-full h-full rounded-full bg-white dark:bg-gray-950 flex items-center justify-center">
+                        <span className="text-gray-900 dark:text-white font-bold text-sm">
                           {step.step}
                         </span>
                       </div>
@@ -183,7 +182,7 @@ export default function HowItWorks() {
                   <motion.div
                     whileHover={{ y: -6 }}
                     transition={{ duration: 0.25, ease: "easeOut" }}
-                    className="flex-1 lg:mt-6 lg:w-full rounded-2xl border border-white/[0.06] bg-white/[0.03] backdrop-blur-md p-5 transition-colors duration-300 hover:border-white/[0.12] hover:bg-white/[0.06]"
+                    className="flex-1 lg:mt-6 lg:w-full rounded-2xl border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 backdrop-blur-md p-5 transition-colors duration-300 hover:border-gray-300 dark:hover:border-white/15 hover:bg-gray-100 dark:hover:bg-white/8"
                   >
                     {/* Icon */}
                     <motion.div
@@ -195,12 +194,12 @@ export default function HowItWorks() {
                     </motion.div>
 
                     {/* Title */}
-                    <h3 className="text-base font-semibold text-white mb-2 leading-snug">
+                    <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-2 leading-snug">
                       {step.title}
                     </h3>
 
                     {/* Description */}
-                    <p className="text-sm text-gray-400 mb-4 leading-relaxed">
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mb-4 leading-relaxed">
                       {step.description}
                     </p>
 
@@ -209,7 +208,7 @@ export default function HowItWorks() {
                       {step.details.map((d) => (
                         <li
                           key={d}
-                          className="text-xs text-gray-500 flex items-start gap-2"
+                          className="text-xs text-gray-500 dark:text-gray-400 flex items-start gap-2"
                         >
                           <span
                             className={`mt-1.5 w-1 h-1 flex-shrink-0 rounded-full bg-gradient-to-br ${step.color}`}

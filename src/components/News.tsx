@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  ExternalLink, Newspaper, Cloud, Cpu, Shield, Ship, Brain,
+  ExternalLink, Newspaper, Cloud, Shield, Ship, Brain,
   Sparkles, TrendingUp, Zap, Globe, Search,
 } from "lucide-react";
 
@@ -144,7 +144,7 @@ const sourceColors: Record<string, string> = {
   Azure: "text-blue-400",
   GCP: "text-green-400",
   CNCF: "text-sky-400",
-  Industry: "text-gray-400",
+  Industry: "text-gray-500 dark:text-gray-400",
 };
 
 const filterTabs: FilterTab[] = ["All", "Cloud", "AI/ML", "DevOps", "Security", "Kubernetes", "FinOps"];
@@ -167,7 +167,7 @@ export default function News() {
 
   return (
     <section className="relative py-28 md:py-36 min-h-screen">
-      <div className="absolute inset-0 bg-gradient-to-b from-[#030712] via-[#040a18] to-[#030712] pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-white dark:from-[#030712] via-blue-50/30 dark:via-transparent to-white dark:to-[#030712] pointer-events-none" />
       <div className="absolute top-[15%] left-[20%] w-[500px] h-[500px] bg-blue-600/[0.03] rounded-full blur-[200px]" />
       <div className="absolute bottom-[20%] right-[15%] w-[400px] h-[400px] bg-cyan-600/[0.03] rounded-full blur-[160px]" />
 
@@ -186,13 +186,13 @@ export default function News() {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-6"
           >
             <Newspaper className="w-4 h-4 text-cyan-400" />
-            <span className="text-sm text-gray-300 font-medium">Tech News</span>
+            <span className="text-sm text-gray-400 dark:text-gray-500 font-medium">Tech News</span>
             <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
           </motion.div>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
             Latest in <span className="text-gradient">Cloud & Tech</span>
           </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto text-lg leading-relaxed">
+          <p className="text-gray-500 dark:text-gray-400 max-w-2xl mx-auto text-lg leading-relaxed">
             Stay ahead with the latest announcements, breakthroughs, and trends across cloud computing, AI/ML, Kubernetes, DevOps, and FinOps.
           </p>
         </motion.div>
@@ -205,13 +205,13 @@ export default function News() {
           className="max-w-xl mx-auto mb-10"
         >
           <div className="relative">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500 dark:text-gray-400" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search news by title, topic, or provider..."
-              className="w-full pl-12 pr-4 py-3.5 bg-white/5 border border-white/10 rounded-2xl text-sm text-white placeholder-gray-500 focus:outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/20 transition-all"
+              className="w-full pl-12 pr-4 py-3.5 bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl text-sm text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/20 transition-all"
             />
           </div>
         </motion.div>
@@ -231,13 +231,13 @@ export default function News() {
                 onClick={() => setActiveFilter(tab)}
                 className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 flex items-center gap-1.5 ${
                   activeFilter === tab
-                    ? "bg-blue-500/15 text-white border border-blue-500/30 shadow-lg shadow-blue-500/10"
-                    : "text-gray-400 border border-white/5 hover:text-white hover:border-white/15 hover:bg-white/[0.03]"
+                    ? "bg-blue-500/15 text-gray-900 dark:text-white border border-blue-500/30 shadow-lg shadow-blue-500/10"
+                    : "text-gray-500 dark:text-gray-400 border border-gray-100 dark:border-white/5 hover:text-gray-900 dark:hover:text-white hover:border-white/15 hover:bg-gray-50 dark:hover:bg-white/5"
                 }`}
               >
                 {config ? <config.icon className="w-3.5 h-3.5" /> : <Globe className="w-3.5 h-3.5" />}
                 {tab}
-                <span className="text-[10px] text-gray-600 ml-0.5">
+                <span className="text-[10px] text-gray-400 dark:text-gray-500 ml-0.5">
                   ({tab === "All" ? newsData.length : newsData.filter((n) => n.category === tab).length})
                 </span>
               </button>
@@ -250,7 +250,7 @@ export default function News() {
           <div className="mb-12">
             <div className="flex items-center gap-2 mb-6">
               <Sparkles className="w-4 h-4 text-cyan-400" />
-              <h3 className="text-sm font-semibold text-white uppercase tracking-wider">Featured</h3>
+              <h3 className="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider">Featured</h3>
             </div>
             <div className="grid md:grid-cols-2 gap-6">
               {featuredNews.map((item, i) => {
@@ -275,16 +275,16 @@ export default function News() {
                           <span className={`text-[10px] px-2.5 py-1 rounded-full border ${config.badge} font-semibold`}>
                             {item.category}
                           </span>
-                          <span className={`text-[10px] font-medium ${sourceColors[item.source] || "text-gray-400"}`}>
+                          <span className={`text-[10px] font-medium ${sourceColors[item.source] || "text-gray-500 dark:text-gray-400"}`}>
                             {item.source}
                           </span>
                         </div>
-                        <span className="text-xs text-gray-500">{item.date}</span>
+                        <span className="text-xs text-gray-500 dark:text-gray-400">{item.date}</span>
                       </div>
-                      <h3 className="text-lg font-semibold text-white mb-3 leading-snug group-hover:text-cyan-300 transition-colors">
+                      <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3 leading-snug group-hover:text-cyan-300 transition-colors">
                         {item.title}
                       </h3>
-                      <p className="text-sm text-gray-400 leading-relaxed mb-5">{item.excerpt}</p>
+                      <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed mb-5">{item.excerpt}</p>
                       <div className="flex items-center gap-1.5 text-sm font-medium text-blue-400 group-hover:text-cyan-400 transition-colors">
                         Read More
                         <ExternalLink className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
@@ -328,16 +328,16 @@ export default function News() {
                           <span className={`text-[10px] px-2 py-0.5 rounded-full border ${config.badge} font-semibold`}>
                             {item.category}
                           </span>
-                          <span className={`text-[10px] font-medium ${sourceColors[item.source] || "text-gray-400"}`}>
+                          <span className={`text-[10px] font-medium ${sourceColors[item.source] || "text-gray-500 dark:text-gray-400"}`}>
                             {item.source}
                           </span>
                         </div>
-                        <span className="text-[10px] text-gray-600">{item.date}</span>
+                        <span className="text-[10px] text-gray-400 dark:text-gray-500">{item.date}</span>
                       </div>
-                      <h3 className="text-sm font-semibold text-white mb-2 leading-snug group-hover:text-cyan-300 transition-colors">
+                      <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-2 leading-snug group-hover:text-cyan-300 transition-colors">
                         {item.title}
                       </h3>
-                      <p className="text-xs text-gray-400 leading-relaxed mb-4 line-clamp-3">{item.excerpt}</p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed mb-4 line-clamp-3">{item.excerpt}</p>
                       <div className="flex items-center gap-1 text-xs font-medium text-blue-400 group-hover:text-cyan-400 transition-colors">
                         Read More
                         <ExternalLink className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
@@ -348,8 +348,8 @@ export default function News() {
               </div>
             ) : (
               <div className="text-center py-20">
-                <Search className="w-10 h-10 text-gray-600 mx-auto mb-4" />
-                <p className="text-gray-400 text-lg">No news found matching your search.</p>
+                <Search className="w-10 h-10 text-gray-400 dark:text-gray-500 mx-auto mb-4" />
+                <p className="text-gray-500 dark:text-gray-400 text-lg">No news found matching your search.</p>
                 <button
                   onClick={() => { setSearchQuery(""); setActiveFilter("All"); }}
                   className="mt-4 text-sm text-blue-400 hover:text-cyan-400 transition-colors"
@@ -381,8 +381,8 @@ export default function News() {
                   <div className={`w-10 h-10 rounded-xl ${config.badge.split(" ")[0]} flex items-center justify-center mx-auto mb-2 group-hover:scale-110 transition-transform`}>
                     <config.icon className={`w-5 h-5 ${config.color}`} />
                   </div>
-                  <p className="text-lg font-bold text-white">{count}</p>
-                  <p className="text-[10px] text-gray-500 uppercase tracking-wider">{tab}</p>
+                  <p className="text-lg font-bold text-gray-900 dark:text-white">{count}</p>
+                  <p className="text-[10px] text-gray-500 dark:text-gray-400 uppercase tracking-wider">{tab}</p>
                 </button>
               );
             })}

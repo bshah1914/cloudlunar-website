@@ -138,7 +138,7 @@ function FeatureCard({ feature, index, className = "" }: { feature: (typeof feat
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.08 }}
       whileHover={{ y: -6 }}
-      className={`glass-card p-7 group relative overflow-hidden hover:bg-white/[0.06] hover:border-white/[0.15] transition-all duration-500 hover:shadow-xl ${feature.glow} ${className}`}
+      className={`glass-card p-7 group relative overflow-hidden hover:bg-gray-100 dark:hover:bg-white/10 hover:border-gray-300 dark:hover:border-white/20 transition-all duration-500 hover:shadow-xl ${feature.glow} ${className}`}
     >
       <div className={`absolute inset-0 bg-gradient-to-br ${feature.hoverOverlay} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
 
@@ -154,11 +154,11 @@ function FeatureCard({ feature, index, className = "" }: { feature: (typeof feat
         <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${feature.gradient} flex items-center justify-center mb-5 group-hover:scale-110 group-hover:shadow-lg transition-all duration-500`}>
           <feature.icon className="w-6 h-6 text-white" />
         </div>
-        <h3 className="text-lg font-semibold text-white mb-2">{feature.title}</h3>
-        <p className="text-sm text-gray-400 leading-relaxed mb-4">{feature.description}</p>
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">{feature.title}</h3>
+        <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed mb-4">{feature.description}</p>
         <div className="flex flex-wrap gap-2">
           {feature.highlights.map((h) => (
-            <span key={h} className="text-[10px] px-2.5 py-1 rounded-lg bg-white/5 text-gray-400 border border-white/5 group-hover:border-white/10 transition-colors">
+            <span key={h} className="text-[10px] px-2.5 py-1 rounded-lg bg-white/5 text-gray-500 dark:text-gray-400 border border-gray-100 dark:border-white/5 group-hover:border-gray-200 dark:group-hover:border-white/10 transition-colors">
               {h}
             </span>
           ))}
@@ -170,11 +170,11 @@ function FeatureCard({ feature, index, className = "" }: { feature: (typeof feat
 
 export default function Features() {
   return (
-    <section id="features" className="relative py-28 md:py-36 bg-[#030712] bg-dots">
-      <div className="absolute inset-0 bg-gradient-to-b from-[#030712] via-transparent to-[#030712] pointer-events-none" />
+    <section id="features" className="relative py-28 md:py-36 bg-white dark:bg-[#030712] bg-dots">
+      <div className="absolute inset-0 bg-gradient-to-b from-white via-transparent to-white dark:from-[#030712] dark:to-[#030712] pointer-events-none" />
 
-      <div className="absolute top-1/4 right-0 w-[600px] h-[600px] bg-blue-600/5 rounded-full blur-[200px] animate-aurora-slow pointer-events-none" />
-      <div className="absolute bottom-1/3 left-0 w-[500px] h-[500px] bg-cyan-600/5 rounded-full blur-[180px] animate-aurora-reverse pointer-events-none" />
+      <div className="absolute top-1/4 right-0 w-[600px] h-[600px] bg-blue-100/30 rounded-full blur-[200px] animate-aurora-slow pointer-events-none" />
+      <div className="absolute bottom-1/3 left-0 w-[500px] h-[500px] bg-cyan-100/20 rounded-full blur-[180px] animate-aurora-reverse pointer-events-none" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-emerald-600/3 rounded-full blur-[160px] pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
@@ -187,11 +187,11 @@ export default function Features() {
           >
             Capabilities
           </motion.span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mt-3 mb-6">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mt-3 mb-6">
             Everything You Need to<br />
             <span className="text-gradient">Optimize Your Cloud</span>
           </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto text-lg leading-relaxed">
+          <p className="text-gray-500 dark:text-gray-400 max-w-2xl mx-auto text-lg leading-relaxed">
             Twelve core capabilities covering discovery, analysis, optimization,
             compliance, anomaly detection, cost allocation, Kubernetes, container
             monitoring &mdash; all powered by real AWS data.
@@ -228,7 +228,7 @@ export default function Features() {
             href={TOOL_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="group inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-semibold rounded-2xl transition-all hover:shadow-xl hover:shadow-blue-500/25 hover:-translate-y-1"
+            className="group inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-semibold rounded-2xl transition-all hover:shadow-xl hover:shadow-blue-500/25 hover:-translate-y-1"
           >
             Try All Features Free
             <ExternalLink className="w-5 h-5 group-hover:translate-x-0.5 transition-transform" />

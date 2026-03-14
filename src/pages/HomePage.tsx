@@ -6,6 +6,10 @@ import PageTransition from "../components/shared/PageTransition";
 import Hero from "../components/Hero";
 import TrustedBy from "../components/TrustedBy";
 import AIProcess from "../components/AIProcess";
+import ROICalculator from "../components/ROICalculator";
+import CaseStudies from "../components/CaseStudies";
+import TrustBadges from "../components/TrustBadges";
+import Testimonials from "../components/Testimonials";
 
 const features = [
   { icon: Search, title: "Auto-Discovery Engine", description: "Scans 18+ AWS services automatically with zero config.", color: "from-blue-500 to-cyan-500" },
@@ -31,16 +35,16 @@ export default function HomePage() {
 
       {/* Features Preview */}
       <section className="relative py-28 md:py-36 bg-grid">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#030712] via-transparent to-[#030712] pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white via-transparent to-white dark:from-[#030712] dark:to-[#030712] pointer-events-none" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-6">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-            <span className="text-blue-400 text-sm font-semibold tracking-widest uppercase">Capabilities</span>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mt-3 mb-6">
+            <span className="text-blue-600 text-sm font-semibold tracking-widest uppercase">Capabilities</span>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mt-3 mb-6">
               Everything You Need to<br />
               <span className="text-gradient">Optimize Your Cloud</span>
             </h2>
-            <p className="text-gray-400 max-w-2xl mx-auto text-lg leading-relaxed">
+            <p className="text-gray-500 dark:text-gray-400 max-w-2xl mx-auto text-lg leading-relaxed">
               Twelve core capabilities covering discovery, analysis, optimization, compliance, Kubernetes, and container monitoring.
             </p>
           </motion.div>
@@ -53,14 +57,14 @@ export default function HomePage() {
               >
                 {feature.isNew && (
                   <div className="absolute top-3 right-3">
-                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-teal-500/10 text-teal-400 border border-teal-500/20 font-semibold">New</span>
+                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-teal-50 dark:bg-teal-500/10 text-teal-600 border border-teal-200 dark:border-teal-500/20 font-semibold">New</span>
                   </div>
                 )}
                 <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-4 group-hover:scale-110 group-hover:shadow-lg transition-all duration-500`}>
                   <feature.icon className="w-5 h-5 text-white" />
                 </div>
-                <h3 className="text-sm font-semibold text-white mb-1.5">{feature.title}</h3>
-                <p className="text-xs text-gray-400 leading-relaxed">{feature.description}</p>
+                <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-1.5">{feature.title}</h3>
+                <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">{feature.description}</p>
               </motion.div>
             ))}
           </div>
@@ -73,14 +77,14 @@ export default function HomePage() {
               >
                 {feature.isNew && (
                   <div className="absolute top-3 right-3">
-                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-teal-500/10 text-teal-400 border border-teal-500/20 font-semibold">New</span>
+                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-teal-50 dark:bg-teal-500/10 text-teal-600 border border-teal-200 dark:border-teal-500/20 font-semibold">New</span>
                   </div>
                 )}
                 <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-4 group-hover:scale-110 group-hover:shadow-lg transition-all duration-500`}>
                   <feature.icon className="w-5 h-5 text-white" />
                 </div>
-                <h3 className="text-sm font-semibold text-white mb-1.5">{feature.title}</h3>
-                <p className="text-xs text-gray-400 leading-relaxed">{feature.description}</p>
+                <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-1.5">{feature.title}</h3>
+                <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">{feature.description}</p>
               </motion.div>
             ))}
           </div>
@@ -96,20 +100,25 @@ export default function HomePage() {
         </div>
       </section>
 
+      <ROICalculator />
+      <CaseStudies />
+      <Testimonials />
+      <TrustBadges />
+
       {/* Quick CTA Strip */}
-      <section className="relative py-20">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/5 via-cyan-600/5 to-emerald-600/5" />
+      <section className="relative py-20 bg-white dark:bg-[#030712]">
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-50/50 via-cyan-50/30 to-emerald-50/50 dark:from-blue-950/20 dark:via-cyan-950/10 dark:to-emerald-950/20" />
         <div className="relative z-10 max-w-5xl mx-auto px-6">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="grid sm:grid-cols-3 gap-6 text-center">
             {[
-              { label: "View Dashboard Preview", to: "/dashboard", desc: "See what real optimization looks like", color: "text-green-400" },
-              { label: "Check Pricing", to: "/pricing", desc: "Start free, scale as you grow", color: "text-amber-400" },
-              { label: "Download Now", to: "/download", desc: "Docker, manual, or hosted", color: "text-cyan-400" },
+              { label: "View Dashboard Preview", to: "/dashboard", desc: "See what real optimization looks like", color: "text-emerald-600" },
+              { label: "Check Pricing", to: "/pricing", desc: "Start free, scale as you grow", color: "text-amber-600" },
+              { label: "Download Now", to: "/download", desc: "Docker, manual, or hosted", color: "text-blue-600" },
             ].map((item, i) => (
               <motion.div key={item.label} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
                 <Link to={item.to} className="group block glass-card-glow p-8 text-center hover:-translate-y-2 transition-all duration-500">
-                  <p className={`text-lg font-semibold text-white mb-2 group-hover:${item.color} transition-colors`}>{item.label}</p>
-                  <p className="text-sm text-gray-500 mb-4">{item.desc}</p>
+                  <p className={`text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2 group-hover:${item.color} transition-colors`}>{item.label}</p>
+                  <p className="text-sm text-gray-400 dark:text-gray-500 mb-4">{item.desc}</p>
                   <ArrowRight className={`w-5 h-5 ${item.color} mx-auto group-hover:translate-x-2 transition-transform`} />
                 </Link>
               </motion.div>

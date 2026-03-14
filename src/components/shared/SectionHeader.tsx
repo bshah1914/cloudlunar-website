@@ -25,11 +25,11 @@ export default function SectionHeader({ badge, badgeColor = "text-blue-400", tit
       >
         {badge}
       </motion.span>
-      <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mt-2 mb-6 leading-tight">
+      <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mt-2 mb-6 leading-tight">
         {title}
       </h2>
       {subtitle && (
-        <p className="text-gray-400 max-w-2xl mx-auto text-lg leading-relaxed">
+        <p className="text-gray-500 max-w-2xl mx-auto text-lg leading-relaxed">
           {subtitle}
         </p>
       )}

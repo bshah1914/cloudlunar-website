@@ -7,7 +7,10 @@ import {
   Orbit,
   ExternalLink,
   ChevronRight,
+  Sun,
+  Moon,
 } from "lucide-react";
+import { useTheme } from "../context/ThemeContext";
 
 const TOOL_URL = "http://localhost:3000";
 
@@ -27,6 +30,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 32);
@@ -45,7 +49,7 @@ export default function Navbar() {
       transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-[#030712]/90 backdrop-blur-xl border-b border-blue-500/[0.06] shadow-lg shadow-black/30"
+          ? "bg-white/80 dark:bg-gray-950/80 backdrop-blur-xl border-b border-gray-200/60 dark:border-white/10 shadow-sm"
           : "bg-transparent"
       }`}
     >
@@ -58,7 +62,7 @@ export default function Navbar() {
                 <Orbit className="w-[18px] h-[18px] text-white" />
               </div>
             </div>
-            <span className="text-lg font-semibold tracking-tight bg-gradient-to-r from-white via-white to-cyan-300 bg-clip-text text-transparent">
+            <span className="text-lg font-semibold tracking-tight text-gray-900 dark:text-white">
               CloudLunar
             </span>
           </Link>
@@ -71,13 +75,13 @@ export default function Navbar() {
                   key={link.href}
                   to={link.href}
                   className={`relative px-3.5 py-1.5 text-[13px] font-medium rounded-lg transition-colors duration-300 ${
-                    isActive ? "text-white" : "text-zinc-400 hover:text-zinc-200"
+                    isActive ? "text-gray-900 dark:text-white" : "text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white"
                   }`}
                 >
                   {isActive && (
                     <motion.span
                       layoutId="nav-pill"
-                      className="absolute inset-0 rounded-lg bg-white/[0.07] ring-1 ring-white/[0.05]"
+                      className="absolute inset-0 rounded-lg bg-gray-100 dark:bg-white/10 ring-1 ring-gray-200/60 dark:ring-white/10"
                       transition={{ type: "spring", stiffness: 350, damping: 30 }}
                     />
                   )}
@@ -95,7 +99,26 @@ export default function Navbar() {
           </div>
 
           <div className="hidden lg:flex items-center gap-2.5">
-            <a href={TOOL_URL} target="_blank" rel="noopener noreferrer" className="px-3.5 py-1.5 text-sm text-zinc-400 hover:text-white transition-colors duration-300">
+            <motion.button
+              onClick={toggleTheme}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              className="w-9 h-9 rounded-xl flex items-center justify-center text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/10 transition-all duration-300"
+              aria-label="Toggle theme"
+            >
+              <AnimatePresence mode="wait" initial={false}>
+                {theme === "light" ? (
+                  <motion.span key="sun" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.2 }}>
+                    <Sun className="w-4.5 h-4.5" />
+                  </motion.span>
+                ) : (
+                  <motion.span key="moon" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.2 }}>
+                    <Moon className="w-4.5 h-4.5" />
+                  </motion.span>
+                )}
+              </AnimatePresence>
+            </motion.button>
+            <a href={TOOL_URL} target="_blank" rel="noopener noreferrer" className="px-3.5 py-1.5 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white transition-colors duration-300">
               Sign In
             </a>
             <a
@@ -111,7 +134,7 @@ export default function Navbar() {
 
           <button
             onClick={() => setMobileOpen((prev) => !prev)}
-            className="lg:hidden relative w-10 h-10 flex items-center justify-center rounded-xl text-zinc-400 hover:text-white hover:bg-white/[0.05] transition-all duration-300"
+            className="lg:hidden relative w-10 h-10 flex items-center justify-center rounded-xl text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/10 transition-all duration-300"
             aria-label="Toggle menu"
           >
             <AnimatePresence mode="wait" initial={false}>
@@ -136,7 +159,7 @@ export default function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            className="lg:hidden overflow-hidden bg-[#030712]/95 backdrop-blur-2xl border-t border-white/[0.04]"
+            className="lg:hidden overflow-hidden bg-white/95 dark:bg-gray-950/95 backdrop-blur-2xl border-t border-gray-200/60 dark:border-white/10"
           >
             <div className="px-5 py-5 space-y-1">
               {navLinks.map((link, i) => {
@@ -146,17 +169,17 @@ export default function Navbar() {
                     <Link
                       to={link.href}
                       className={`flex items-center justify-between px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300 ${
-                        isActive ? "bg-blue-500/10 text-white ring-1 ring-blue-500/[0.12]" : "text-zinc-300 hover:text-white hover:bg-white/[0.04]"
+                        isActive ? "bg-blue-50 dark:bg-blue-500/10 text-blue-700 dark:text-blue-400 ring-1 ring-blue-200/60 dark:ring-blue-500/20" : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-white/5"
                       }`}
                     >
                       <span>{link.label}</span>
-                      <ChevronRight className={`w-4 h-4 transition-colors ${isActive ? "text-cyan-400" : "text-zinc-600"}`} />
+                      <ChevronRight className={`w-4 h-4 transition-colors ${isActive ? "text-blue-500" : "text-gray-300"}`} />
                     </Link>
                   </motion.div>
                 );
               })}
-              <div className="pt-3 mt-2 border-t border-white/[0.05] space-y-2.5">
-                <a href={TOOL_URL} target="_blank" rel="noopener noreferrer" className="block px-4 py-2.5 text-sm text-zinc-400 hover:text-white transition-colors">
+              <div className="pt-3 mt-2 border-t border-gray-100 dark:border-white/10 space-y-2.5">
+                <a href={TOOL_URL} target="_blank" rel="noopener noreferrer" className="block px-4 py-2.5 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white transition-colors">
                   Sign In
                 </a>
                 <a

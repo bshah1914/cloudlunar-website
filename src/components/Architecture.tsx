@@ -93,7 +93,7 @@ export default function Architecture() {
 
   return (
     <section id="architecture" className="relative py-28 md:py-36 bg-grid">
-      <div className="absolute inset-0 bg-gradient-to-b from-[#030712] via-transparent to-[#030712] pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-white via-transparent to-white dark:from-[#030712] dark:to-[#030712] pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         <motion.div
@@ -103,11 +103,11 @@ export default function Architecture() {
           className="text-center mb-16"
         >
           <span className="text-cyan-400 text-sm font-semibold tracking-widest uppercase">Under the Hood</span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mt-3 mb-6">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mt-3 mb-6">
             Architecture &<br />
             <span className="text-gradient">Tech Stack</span>
           </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto text-lg">
+          <p className="text-gray-500 dark:text-gray-400 max-w-2xl mx-auto text-lg">
             Full-stack SaaS built for production. Every layer designed for scalability, security, and real data accuracy.
           </p>
 
@@ -118,7 +118,7 @@ export default function Architecture() {
               className={`px-5 py-2.5 rounded-xl text-sm font-medium transition-all ${
                 view === "architecture"
                   ? "bg-blue-500/20 text-blue-300 border border-blue-500/30"
-                  : "glass text-gray-400 hover:text-white"
+                  : "glass text-gray-500 hover:text-gray-900 dark:hover:text-white"
               }`}
             >
               <Layers className="w-4 h-4 inline mr-1.5 -mt-0.5" />
@@ -129,7 +129,7 @@ export default function Architecture() {
               className={`px-5 py-2.5 rounded-xl text-sm font-medium transition-all ${
                 view === "stack"
                   ? "bg-blue-500/20 text-blue-300 border border-blue-500/30"
-                  : "glass text-gray-400 hover:text-white"
+                  : "glass text-gray-500 hover:text-gray-900 dark:hover:text-white"
               }`}
             >
               <Cpu className="w-4 h-4 inline mr-1.5 -mt-0.5" />
@@ -140,7 +140,7 @@ export default function Architecture() {
               className={`px-5 py-2.5 rounded-xl text-sm font-medium transition-all ${
                 view === "hosting"
                   ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/30"
-                  : "glass text-gray-400 hover:text-white"
+                  : "glass text-gray-500 hover:text-gray-900 dark:hover:text-white"
               }`}
             >
               <Server className="w-4 h-4 inline mr-1.5 -mt-0.5" />
@@ -156,7 +156,7 @@ export default function Architecture() {
           viewport={{ once: true }}
           className="glass-card p-6 md:p-8 mb-8"
         >
-          <h3 className="text-sm font-semibold text-gray-300 mb-5 text-center">Account Sync Pipeline</h3>
+          <h3 className="text-sm font-semibold text-gray-400 dark:text-gray-500 mb-5 text-center">Account Sync Pipeline</h3>
           <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-2">
             {pipeline.map((step, i) => (
               <React.Fragment key={step.step}>
@@ -165,8 +165,8 @@ export default function Architecture() {
                     {step.step}
                   </div>
                   <div>
-                    <p className="text-sm font-semibold text-white">{step.label}</p>
-                    <p className="text-xs text-gray-500">{step.desc}</p>
+                    <p className="text-sm font-semibold text-gray-900 dark:text-white">{step.label}</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">{step.desc}</p>
                   </div>
                 </div>
                 {i < pipeline.length - 1 && (
@@ -188,20 +188,20 @@ export default function Architecture() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: i * 0.08 }}
-                  className="glass-card p-6 hover:bg-white/[0.06] transition-all"
+                  className="glass-card p-6 hover:bg-gray-100 dark:hover:bg-white/10 transition-all"
                 >
                   <div className="flex items-center gap-3 mb-4">
                     <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${layer.color} flex items-center justify-center`}>
                       <layer.icon className="w-5 h-5 text-white" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-white">{layer.title}</h3>
-                      <p className="text-xs text-gray-500">{layer.subtitle}</p>
+                      <h3 className="font-semibold text-gray-900 dark:text-white">{layer.title}</h3>
+                      <p className="text-xs text-gray-500 dark:text-gray-400">{layer.subtitle}</p>
                     </div>
                   </div>
                   <ul className="space-y-2">
                     {layer.items.map((item) => (
-                      <li key={item} className="text-sm text-gray-400 flex items-start gap-2">
+                      <li key={item} className="text-sm text-gray-500 dark:text-gray-400 flex items-start gap-2">
                         <span className="w-1.5 h-1.5 rounded-full bg-blue-500/60 mt-1.5 flex-shrink-0" />
                         {item}
                       </li>
@@ -224,22 +224,22 @@ export default function Architecture() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: i * 0.08 }}
-                  className={`glass-card p-6 border-t-2 ${layer.borderColor} hover:bg-white/[0.06] transition-all`}
+                  className={`glass-card p-6 border-t-2 ${layer.borderColor} hover:bg-gray-100 dark:hover:bg-white/10 transition-all`}
                 >
                   <div className="flex items-center gap-3 mb-5">
                     <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${layer.color} flex items-center justify-center`}>
                       <layer.icon className="w-5 h-5 text-white" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-white">{layer.title}</h3>
-                      <p className="text-xs text-gray-500">{layer.subtitle}</p>
+                      <h3 className="font-semibold text-gray-900 dark:text-white">{layer.title}</h3>
+                      <p className="text-xs text-gray-500 dark:text-gray-400">{layer.subtitle}</p>
                     </div>
                   </div>
                   <div className="space-y-3">
                     {layer.tech.map((t) => (
-                      <div key={t} className="flex items-center gap-3 bg-white/[0.03] rounded-lg px-3 py-2.5 border border-white/5">
+                      <div key={t} className="flex items-center gap-3 bg-gray-50 dark:bg-white/5 rounded-lg px-3 py-2.5 border border-gray-100 dark:border-white/5">
                         <div className={`w-2 h-2 rounded-full bg-gradient-to-br ${layer.color}`} />
-                        <span className="text-sm font-medium text-white">{t}</span>
+                        <span className="text-sm font-medium text-gray-900 dark:text-white">{t}</span>
                       </div>
                     ))}
                   </div>
@@ -254,18 +254,18 @@ export default function Architecture() {
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }} className="space-y-6">
             {/* Resource Usage Breakdown */}
             <div className="glass-card p-6 md:p-8">
-              <h3 className="text-lg font-semibold text-white mb-2">Resource Usage per Component</h3>
-              <p className="text-sm text-gray-400 mb-6">CloudLunar is lightweight by design. Here's what each component uses on a single server.</p>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Resource Usage per Component</h3>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">CloudLunar is lightweight by design. Here's what each component uses on a single server.</p>
 
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead>
-                    <tr className="border-b border-white/10 text-left">
-                      <th className="pb-3 pr-4 text-xs font-medium text-gray-500">Component</th>
-                      <th className="pb-3 pr-4 text-xs font-medium text-gray-500">CPU</th>
-                      <th className="pb-3 pr-4 text-xs font-medium text-gray-500">Memory</th>
-                      <th className="pb-3 pr-4 text-xs font-medium text-gray-500">Disk</th>
-                      <th className="pb-3 text-xs font-medium text-gray-500">Notes</th>
+                    <tr className="border-b border-gray-200 dark:border-white/10 text-left">
+                      <th className="pb-3 pr-4 text-xs font-medium text-gray-500 dark:text-gray-400">Component</th>
+                      <th className="pb-3 pr-4 text-xs font-medium text-gray-500 dark:text-gray-400">CPU</th>
+                      <th className="pb-3 pr-4 text-xs font-medium text-gray-500 dark:text-gray-400">Memory</th>
+                      <th className="pb-3 pr-4 text-xs font-medium text-gray-500 dark:text-gray-400">Disk</th>
+                      <th className="pb-3 text-xs font-medium text-gray-500 dark:text-gray-400">Notes</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -276,17 +276,17 @@ export default function Architecture() {
                       { name: "Redis", cpu: "~0.1 core", mem: "50-100 MB", disk: "~50 MB", note: "Session cache & queues", icon: Zap, color: "text-amber-400" },
                       { name: "CloudLunar Agent", cpu: "< 0.01 core", mem: "25-40 MB", disk: "0", note: "Runs on monitored servers", icon: Radio, color: "text-teal-400" },
                     ].map((row) => (
-                      <tr key={row.name} className="border-b border-white/5 hover:bg-white/[0.02]">
+                      <tr key={row.name} className="border-b border-gray-100 dark:border-white/5 hover:bg-white/70 dark:hover:bg-white/5">
                         <td className="py-3 pr-4">
                           <div className="flex items-center gap-2">
                             <row.icon className={`w-4 h-4 ${row.color} flex-shrink-0`} />
-                            <span className="text-sm font-medium text-white">{row.name}</span>
+                            <span className="text-sm font-medium text-gray-900 dark:text-white">{row.name}</span>
                           </div>
                         </td>
-                        <td className="py-3 pr-4 text-xs text-gray-300 font-mono">{row.cpu}</td>
-                        <td className="py-3 pr-4 text-xs text-gray-300 font-mono">{row.mem}</td>
-                        <td className="py-3 pr-4 text-xs text-gray-300 font-mono">{row.disk}</td>
-                        <td className="py-3 text-xs text-gray-500">{row.note}</td>
+                        <td className="py-3 pr-4 text-xs text-gray-400 dark:text-gray-500 font-mono">{row.cpu}</td>
+                        <td className="py-3 pr-4 text-xs text-gray-400 dark:text-gray-500 font-mono">{row.mem}</td>
+                        <td className="py-3 pr-4 text-xs text-gray-400 dark:text-gray-500 font-mono">{row.disk}</td>
+                        <td className="py-3 text-xs text-gray-500 dark:text-gray-400">{row.note}</td>
                       </tr>
                     ))}
                     <tr className="bg-emerald-500/5">
@@ -308,7 +308,7 @@ export default function Architecture() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="glass-card p-6 hover:bg-white/[0.06] transition-all"
+                className="glass-card p-6 hover:bg-gray-100 dark:hover:bg-white/10 transition-all"
               >
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-3">
@@ -316,33 +316,33 @@ export default function Architecture() {
                       <Server className="w-5 h-5 text-white" />
                     </div>
                     <div>
-                      <h4 className="font-semibold text-white">Development / Small Team</h4>
-                      <p className="text-xs text-gray-500">Up to 5 cloud accounts</p>
+                      <h4 className="font-semibold text-gray-900 dark:text-white">Development / Small Team</h4>
+                      <p className="text-xs text-gray-500 dark:text-gray-400">Up to 5 cloud accounts</p>
                     </div>
                   </div>
                   <span className="text-[10px] px-2.5 py-1 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20 font-semibold">Starter</span>
                 </div>
                 <div className="grid grid-cols-2 gap-3 mb-4">
-                  <div className="bg-white/[0.03] rounded-lg p-3 border border-white/5 text-center">
-                    <p className="text-xs text-gray-500 mb-1">Instance</p>
-                    <p className="text-sm font-bold text-white">t3.small</p>
+                  <div className="bg-gray-50 dark:bg-white/5 rounded-lg p-3 border border-gray-100 dark:border-white/5 text-center">
+                    <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Instance</p>
+                    <p className="text-sm font-bold text-gray-900 dark:text-white">t3.small</p>
                   </div>
-                  <div className="bg-white/[0.03] rounded-lg p-3 border border-white/5 text-center">
-                    <p className="text-xs text-gray-500 mb-1">vCPU</p>
-                    <p className="text-sm font-bold text-white">2 cores</p>
+                  <div className="bg-gray-50 dark:bg-white/5 rounded-lg p-3 border border-gray-100 dark:border-white/5 text-center">
+                    <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">vCPU</p>
+                    <p className="text-sm font-bold text-gray-900 dark:text-white">2 cores</p>
                   </div>
-                  <div className="bg-white/[0.03] rounded-lg p-3 border border-white/5 text-center">
-                    <p className="text-xs text-gray-500 mb-1">RAM</p>
-                    <p className="text-sm font-bold text-white">2 GB</p>
+                  <div className="bg-gray-50 dark:bg-white/5 rounded-lg p-3 border border-gray-100 dark:border-white/5 text-center">
+                    <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">RAM</p>
+                    <p className="text-sm font-bold text-gray-900 dark:text-white">2 GB</p>
                   </div>
-                  <div className="bg-white/[0.03] rounded-lg p-3 border border-white/5 text-center">
-                    <p className="text-xs text-gray-500 mb-1">Disk</p>
-                    <p className="text-sm font-bold text-white">20 GB</p>
+                  <div className="bg-gray-50 dark:bg-white/5 rounded-lg p-3 border border-gray-100 dark:border-white/5 text-center">
+                    <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Disk</p>
+                    <p className="text-sm font-bold text-gray-900 dark:text-white">20 GB</p>
                   </div>
                 </div>
                 <div className="flex items-center justify-between bg-emerald-500/5 rounded-lg px-4 py-2.5 border border-emerald-500/10">
-                  <span className="text-xs text-gray-400">Estimated Cost</span>
-                  <span className="text-lg font-bold text-emerald-400">~$15<span className="text-xs font-normal text-gray-500">/mo</span></span>
+                  <span className="text-xs text-gray-500 dark:text-gray-400">Estimated Cost</span>
+                  <span className="text-lg font-bold text-emerald-400">~$15<span className="text-xs font-normal text-gray-500 dark:text-gray-400">/mo</span></span>
                 </div>
               </motion.div>
 
@@ -352,7 +352,7 @@ export default function Architecture() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.1 }}
-                className="glass-card p-6 hover:bg-white/[0.06] transition-all relative"
+                className="glass-card p-6 hover:bg-gray-100 dark:hover:bg-white/10 transition-all relative"
               >
                 <div className="absolute top-3 right-3">
                   <span className="text-[10px] px-2.5 py-1 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 font-semibold">Recommended</span>
@@ -362,31 +362,31 @@ export default function Architecture() {
                     <Gauge className="w-5 h-5 text-white" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-white">Production / Team</h4>
-                    <p className="text-xs text-gray-500">Up to 20 cloud accounts + agents</p>
+                    <h4 className="font-semibold text-gray-900 dark:text-white">Production / Team</h4>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">Up to 20 cloud accounts + agents</p>
                   </div>
                 </div>
                 <div className="grid grid-cols-2 gap-3 mb-4">
-                  <div className="bg-white/[0.03] rounded-lg p-3 border border-white/5 text-center">
-                    <p className="text-xs text-gray-500 mb-1">Instance</p>
-                    <p className="text-sm font-bold text-white">t3.medium</p>
+                  <div className="bg-gray-50 dark:bg-white/5 rounded-lg p-3 border border-gray-100 dark:border-white/5 text-center">
+                    <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Instance</p>
+                    <p className="text-sm font-bold text-gray-900 dark:text-white">t3.medium</p>
                   </div>
-                  <div className="bg-white/[0.03] rounded-lg p-3 border border-white/5 text-center">
-                    <p className="text-xs text-gray-500 mb-1">vCPU</p>
-                    <p className="text-sm font-bold text-white">2 cores</p>
+                  <div className="bg-gray-50 dark:bg-white/5 rounded-lg p-3 border border-gray-100 dark:border-white/5 text-center">
+                    <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">vCPU</p>
+                    <p className="text-sm font-bold text-gray-900 dark:text-white">2 cores</p>
                   </div>
-                  <div className="bg-white/[0.03] rounded-lg p-3 border border-white/5 text-center">
-                    <p className="text-xs text-gray-500 mb-1">RAM</p>
-                    <p className="text-sm font-bold text-white">4 GB</p>
+                  <div className="bg-gray-50 dark:bg-white/5 rounded-lg p-3 border border-gray-100 dark:border-white/5 text-center">
+                    <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">RAM</p>
+                    <p className="text-sm font-bold text-gray-900 dark:text-white">4 GB</p>
                   </div>
-                  <div className="bg-white/[0.03] rounded-lg p-3 border border-white/5 text-center">
-                    <p className="text-xs text-gray-500 mb-1">Disk</p>
-                    <p className="text-sm font-bold text-white">30-50 GB</p>
+                  <div className="bg-gray-50 dark:bg-white/5 rounded-lg p-3 border border-gray-100 dark:border-white/5 text-center">
+                    <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Disk</p>
+                    <p className="text-sm font-bold text-gray-900 dark:text-white">30-50 GB</p>
                   </div>
                 </div>
                 <div className="flex items-center justify-between bg-emerald-500/5 rounded-lg px-4 py-2.5 border border-emerald-500/10">
-                  <span className="text-xs text-gray-400">Estimated Cost</span>
-                  <span className="text-lg font-bold text-emerald-400">~$30<span className="text-xs font-normal text-gray-500">/mo</span></span>
+                  <span className="text-xs text-gray-500 dark:text-gray-400">Estimated Cost</span>
+                  <span className="text-lg font-bold text-emerald-400">~$30<span className="text-xs font-normal text-gray-500 dark:text-gray-400">/mo</span></span>
                 </div>
               </motion.div>
             </div>
@@ -409,9 +409,9 @@ export default function Architecture() {
                   <div className={`w-10 h-10 rounded-xl ${stat.bg} flex items-center justify-center mx-auto mb-3`}>
                     <stat.icon className={`w-5 h-5 ${stat.color}`} />
                   </div>
-                  <p className="text-lg font-bold text-white">{stat.value}</p>
-                  <p className="text-xs text-gray-500 mt-0.5">{stat.label}</p>
-                  <p className="text-[10px] text-gray-600 mt-1">{stat.desc}</p>
+                  <p className="text-lg font-bold text-gray-900 dark:text-white">{stat.value}</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{stat.label}</p>
+                  <p className="text-[10px] text-gray-400 dark:text-gray-500 mt-1">{stat.desc}</p>
                 </motion.div>
               ))}
             </div>
@@ -420,8 +420,8 @@ export default function Architecture() {
             <div className="glass-card p-5 flex flex-col sm:flex-row items-start gap-4">
               <CheckCircle2 className="w-5 h-5 text-emerald-400 flex-shrink-0 mt-0.5" />
               <div>
-                <p className="text-sm text-gray-300">
-                  <strong className="text-white">No surprise bills.</strong> CloudLunar uses no external paid APIs for monitoring. The agent reads metrics from <code className="text-teal-300 bg-teal-500/10 px-1.5 py-0.5 rounded text-[11px]">/proc</code> via psutil ($0), AWS resource discovery uses free <code className="text-teal-300 bg-teal-500/10 px-1.5 py-0.5 rounded text-[11px]">describe_*</code> API calls ($0), and CloudWatch is only used for optimization analysis on the resources you choose to scan. The database grows ~50 MB/month per agent — set a 90-day retention policy and disk usage stays flat.
+                <p className="text-sm text-gray-400 dark:text-gray-500">
+                  <strong className="text-gray-900 dark:text-white">No surprise bills.</strong> CloudLunar uses no external paid APIs for monitoring. The agent reads metrics from <code className="text-teal-300 bg-teal-500/10 px-1.5 py-0.5 rounded text-[11px]">/proc</code> via psutil ($0), AWS resource discovery uses free <code className="text-teal-300 bg-teal-500/10 px-1.5 py-0.5 rounded text-[11px]">describe_*</code> API calls ($0), and CloudWatch is only used for optimization analysis on the resources you choose to scan. The database grows ~50 MB/month per agent — set a 90-day retention policy and disk usage stays flat.
                 </p>
               </div>
             </div>

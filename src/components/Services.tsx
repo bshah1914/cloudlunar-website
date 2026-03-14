@@ -25,7 +25,7 @@ const services = [
   { icon: Search, name: "OpenSearch", type: "Analytics", checks: ["Low CPU utilization domains", "m5/r5 \u2192 Graviton (m6g/r6g)", "EBS volume optimization"], color: "text-violet-400", bg: "bg-violet-500/10" },
   { icon: MessageSquare, name: "SQS Queues", type: "Messaging", checks: ["DLQ message accumulation", "Missing redrive policy", "Processing failure alerts"], color: "text-lime-400", bg: "bg-lime-500/10" },
   { icon: FileText, name: "CloudWatch Logs", type: "Monitoring", checks: ["Missing retention policy", "Export to S3 for old logs", "Storage cost optimization ($0.03/GB)"], color: "text-fuchsia-400", bg: "bg-fuchsia-500/10" },
-  { icon: BarChart3, name: "Cost Explorer", type: "Billing", checks: ["90-day cost trend analysis", "Service-level cost breakdown", "Month-over-month change tracking"], color: "text-gray-400", bg: "bg-gray-500/10" },
+  { icon: BarChart3, name: "Cost Explorer", type: "Billing", checks: ["90-day cost trend analysis", "Service-level cost breakdown", "Month-over-month change tracking"], color: "text-gray-500", bg: "bg-gray-500/10" },
 ];
 
 const typeColors: Record<string, string> = {
@@ -46,15 +46,15 @@ export default function Services() {
 
   return (
     <section id="services" className="relative py-28 md:py-36">
-      <div className="absolute inset-0 bg-gradient-to-b from-[#030712] via-transparent to-[#030712] pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-white via-transparent to-white dark:from-[#030712] dark:to-[#030712] pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
-          <span className="text-cyan-400 text-sm font-semibold tracking-widest uppercase">Coverage</span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mt-3 mb-6">
+          <span className="text-blue-600 text-sm font-semibold tracking-widest uppercase">Coverage</span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mt-3 mb-6">
             <span className="text-gradient">18 AWS Services</span><br />Covered
           </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto text-lg leading-relaxed">
+          <p className="text-gray-500 dark:text-gray-400 max-w-2xl mx-auto text-lg leading-relaxed">
             Every service is auto-discovered from your AWS account using boto3 API calls. Click any service to see the specific optimization checks the engine runs.
           </p>
         </motion.div>
@@ -70,7 +70,7 @@ export default function Services() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: i * 0.03 }}
                 onClick={() => setExpanded(isExpanded ? null : svc.name)}
-                className={`glass-card p-5 cursor-pointer transition-all duration-300 ${isExpanded ? "bg-white/[0.08] border-white/[0.15]" : "hover:bg-white/[0.06]"}`}
+                className={`glass-card p-5 cursor-pointer transition-all duration-300 ${isExpanded ? "bg-gray-100 dark:bg-white/10 border-gray-300 dark:border-white/20" : "hover:bg-gray-100 dark:hover:bg-white/10"}`}
               >
                 <div className="flex items-start gap-4">
                   <div className={`w-10 h-10 rounded-xl ${svc.bg} flex items-center justify-center flex-shrink-0`}>
@@ -79,17 +79,17 @@ export default function Services() {
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
-                        <h3 className="font-semibold text-white text-sm">{svc.name}</h3>
+                        <h3 className="font-semibold text-gray-900 dark:text-white text-sm">{svc.name}</h3>
                         <span className={`text-[10px] px-2 py-0.5 rounded-full border ${typeColors[svc.type]}`}>
                           {svc.type}
                         </span>
                       </div>
-                      <ChevronRight className={`w-4 h-4 text-gray-500 transition-transform duration-300 ${isExpanded ? "rotate-90" : ""}`} />
+                      <ChevronRight className={`w-4 h-4 text-gray-500 dark:text-gray-400 transition-transform duration-300 ${isExpanded ? "rotate-90" : ""}`} />
                     </div>
                     {isExpanded && (
                       <motion.ul initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mt-3 space-y-1.5">
                         {svc.checks.map((check) => (
-                          <li key={check} className="text-xs text-gray-400 flex items-start gap-2">
+                          <li key={check} className="text-xs text-gray-500 dark:text-gray-400 flex items-start gap-2">
                             <span className="w-1 h-1 bg-blue-500 rounded-full mt-1.5 flex-shrink-0" />
                             {check}
                           </li>
@@ -97,7 +97,7 @@ export default function Services() {
                       </motion.ul>
                     )}
                     {!isExpanded && (
-                      <p className="text-[11px] text-gray-600 mt-1">{svc.checks.length} optimization checks</p>
+                      <p className="text-[11px] text-gray-400 dark:text-gray-500 mt-1">{svc.checks.length} optimization checks</p>
                     )}
                   </div>
                 </div>

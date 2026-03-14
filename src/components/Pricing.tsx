@@ -108,29 +108,29 @@ export default function Pricing() {
   const [annual, setAnnual] = useState(false);
 
   return (
-    <section id="pricing" className="relative py-28 md:py-36" style={{ backgroundColor: "#030712" }}>
+    <section id="pricing" className="relative py-28 md:py-36 bg-slate-50 dark:bg-[#030712]">
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[800px] rounded-full bg-blue-600/5 blur-[120px]" />
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[800px] rounded-full bg-blue-100/30 blur-[120px]" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-16">
-          <span className="inline-block text-amber-400 text-sm font-semibold tracking-widest uppercase mb-4 px-4 py-1.5 rounded-full border border-amber-400/20 bg-amber-400/5">
+          <span className="inline-block text-amber-600 text-sm font-semibold tracking-widest uppercase mb-4 px-4 py-1.5 rounded-full border border-amber-200 bg-amber-50">
             Pricing
           </span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mt-3 mb-6">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mt-3 mb-6">
             Simple, Transparent<br />
             <span className="text-gradient-gold">Pricing</span>
           </h2>
-          <p className="text-gray-400 max-w-xl mx-auto text-lg leading-relaxed">
+          <p className="text-gray-500 dark:text-gray-400 max-w-xl mx-auto text-lg leading-relaxed">
             Start free and scale as your cloud grows. Every plan includes real AWS data analysis.
           </p>
 
           <div className="flex items-center justify-center gap-4 mt-10">
-            <span className={`text-sm font-medium transition-colors ${!annual ? "text-white" : "text-gray-500"}`}>Monthly</span>
+            <span className={`text-sm font-medium transition-colors ${!annual ? "text-gray-900 dark:text-white" : "text-gray-400 dark:text-gray-500"}`}>Monthly</span>
             <button
               onClick={() => setAnnual(!annual)}
-              className={`relative w-16 h-8 rounded-full transition-colors duration-300 ${annual ? "bg-gradient-to-r from-blue-600 to-cyan-500" : "bg-white/10"}`}
+              className={`relative w-16 h-8 rounded-full transition-colors duration-300 ${annual ? "bg-gradient-to-r from-blue-600 to-cyan-500" : "bg-gray-200 dark:bg-white/10"}`}
             >
               <motion.div
                 layout
@@ -139,9 +139,9 @@ export default function Pricing() {
                 style={{ left: annual ? "calc(100% - 26px)" : "6px" }}
               />
             </button>
-            <span className={`text-sm font-medium transition-colors ${annual ? "text-white" : "text-gray-500"}`}>
+            <span className={`text-sm font-medium transition-colors ${annual ? "text-gray-900 dark:text-white" : "text-gray-400 dark:text-gray-500"}`}>
               Annual
-              <span className="ml-2 text-[10px] px-2.5 py-1 rounded-full bg-green-500/10 text-green-400 border border-green-500/20 font-semibold">
+              <span className="ml-2 text-[10px] px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200 font-semibold">
                 Save 20%
               </span>
             </span>
@@ -157,10 +157,10 @@ export default function Pricing() {
                 <div className="absolute -inset-[1px] rounded-2xl bg-gradient-to-b from-blue-500 via-cyan-500 to-blue-500/20 opacity-100" />
               )}
 
-              <div className={`relative flex flex-col h-full rounded-2xl p-7 backdrop-blur-xl transition-shadow duration-300 ${
+              <div className={`relative flex flex-col h-full rounded-2xl p-7 transition-shadow duration-300 ${
                 plan.popular
-                  ? "bg-[#060d1f]/95 shadow-xl shadow-blue-500/10 group-hover:shadow-2xl group-hover:shadow-blue-500/20"
-                  : "bg-white/[0.03] border border-white/[0.06] group-hover:shadow-xl group-hover:shadow-white/5 group-hover:bg-white/[0.05]"
+                  ? "bg-white dark:bg-[#030712] shadow-xl shadow-blue-500/10 group-hover:shadow-2xl group-hover:shadow-blue-500/15"
+                  : "bg-white dark:bg-[#030712] border border-gray-200 dark:border-white/10 group-hover:shadow-lg group-hover:border-gray-300 dark:group-hover:border-white/20"
               }`}>
                 {plan.popular && (
                   <div className="absolute -top-4 left-1/2 -translate-x-1/2">
@@ -171,25 +171,25 @@ export default function Pricing() {
                 )}
 
                 <div className="mb-6">
-                  <h3 className="text-lg font-bold text-white mb-1">{plan.name}</h3>
-                  <p className="text-xs text-gray-500 leading-relaxed">{plan.description}</p>
+                  <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1">{plan.name}</h3>
+                  <p className="text-xs text-gray-400 dark:text-gray-500 leading-relaxed">{plan.description}</p>
                 </div>
 
                 <div className="flex items-baseline gap-1.5 mb-6">
-                  <span className="text-4xl font-extrabold text-white tracking-tight">
+                  <span className="text-4xl font-extrabold text-gray-900 dark:text-white tracking-tight">
                     {annual ? plan.annual : plan.monthly}
                   </span>
-                  <span className="text-sm text-gray-500 font-medium">
+                  <span className="text-sm text-gray-400 dark:text-gray-500 font-medium">
                     {annual ? plan.annualPeriod : plan.period}
                   </span>
                 </div>
 
-                <div className={`h-px mb-6 ${plan.popular ? "bg-gradient-to-r from-transparent via-blue-500/30 to-transparent" : "bg-white/[0.06]"}`} />
+                <div className={`h-px mb-6 ${plan.popular ? "bg-gradient-to-r from-transparent via-blue-300/50 to-transparent" : "bg-gray-100 dark:bg-white/5"}`} />
 
                 <ul className="space-y-3 mb-8 flex-1">
                   {plan.features.map((feature) => (
-                    <li key={feature} className="flex items-start gap-2.5 text-[13px] text-gray-300">
-                      <Check className="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" />
+                    <li key={feature} className="flex items-start gap-2.5 text-[13px] text-gray-600 dark:text-gray-300">
+                      <Check className="w-4 h-4 text-emerald-500 flex-shrink-0 mt-0.5" />
                       {feature}
                     </li>
                   ))}
@@ -202,7 +202,7 @@ export default function Pricing() {
                   className={`w-full flex items-center justify-center gap-2 py-3.5 rounded-xl font-semibold text-sm transition-all duration-300 hover:-translate-y-0.5 ${
                     plan.popular
                       ? "bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white shadow-lg shadow-blue-500/20 hover:shadow-xl hover:shadow-blue-500/30"
-                      : "bg-white/[0.06] border border-white/[0.08] hover:bg-white/[0.1] text-white hover:border-white/[0.15]"
+                      : "bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 hover:bg-gray-100 dark:hover:bg-white/10 text-gray-800 dark:text-gray-100 hover:border-gray-300 dark:hover:border-white/20"
                   }`}
                 >
                   {plan.cta}
@@ -214,10 +214,10 @@ export default function Pricing() {
         </motion.div>
 
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.4 }} className="text-center mt-14">
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-gray-400 dark:text-gray-500">
             All plans include &bull; Real AWS data &bull; Secure STS AssumeRole &bull; Read-only access &bull; SOC 2 compliant
           </p>
-          <p className="text-xs text-gray-600 mt-2">
+          <p className="text-xs text-gray-400 dark:text-gray-500 mt-2">
             Have a coupon code? Apply it at checkout for additional discounts.
           </p>
         </motion.div>
